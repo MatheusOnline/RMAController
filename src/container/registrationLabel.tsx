@@ -80,29 +80,30 @@ const RegistrationLabel: React.FC = () => {
   const [status, setStatus] = useState("Em Análise");
 
   useEffect(() => {
-    const codeReader = new BrowserQRCodeReader();
-    if (videoRef.current) {
-      codeReader
-        .decodeFromVideoDevice(undefined, videoRef.current, (result, err) => {
-          if (result) {
-            setQrCode(result.getText());
-            codeReader.reset(); // Para a leitura após ler o QR
-          }
-          if (err && !(err.name === "NotFoundException")) {
-            console.error("Erro ao ler QR:", err);
-          }
-        })
-        .catch((err) => console.error("Erro ao iniciar câmera:", err));
-    }
+  const codeReader = new BrowserQRCodeReader();
+  if (videoRef.current) {
+    codeReader
+      .decodeFromVideoDevice(null, videoRef.current!, (result, err) => {
+        if (result) {
+          setQrCode(result.getText());
+          codeReader.reset(); // Para a leitura após ler o QR
+        }
+        if (err && !(err.name === "NotFoundException")) {
+          console.error("Erro ao ler QR:", err);
+        }
+      })
+      .catch((err) => console.error("Erro ao iniciar câmera:", err));
+  }
 
-    return () => codeReader.reset();
-  }, []);
+  return () => codeReader.reset();
+}, []);
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/rma", {
+        await fetch("http://localhost:5000/rma", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: qrCode, motivo, data: dataAtual, status })
