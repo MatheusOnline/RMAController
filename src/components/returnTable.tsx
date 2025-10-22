@@ -1,8 +1,21 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-// --- Styled Components ---
+// --- Tipos ---
+interface ItemRMA {
+  _id: string;
+  id: string;
+  motivo: string;
+  status: string;
+  data: string;
+}
+
+interface ReturnTableProps {
+  data: ItemRMA[];
+}
+
+// --- Styled Components (os mesmos) ---
 const WrapTable = styled.div`
   width: 80%;
   background-color: #ffffff;
@@ -11,6 +24,10 @@ const WrapTable = styled.div`
   box-sizing: border-box;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const Header = styled.div`
@@ -18,6 +35,11 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
+
+  @media (max-width: 768px) {
+    align-items: start;
+    flex-direction: column;
+  }
 `;
 
 const Title = styled.h1`
@@ -90,7 +112,7 @@ const Button = styled.button`
 `;
 
 const Buttoninclude = styled(Link)`
-  width: 200px;
+  width: 100%;
   height: 40px;
   border: 1px solid blue;
   background-color: none;
@@ -105,38 +127,24 @@ const Buttoninclude = styled(Link)`
   &:hover {
     cursor: pointer;
   }
+
+   @media (max-width: 768px) {
+    
+   
+  }
 `;
 
 const ContainerButton = styled.div`
   display: flex;
   gap: 10px;
+
+ 
 `;
 
 // --- Componente Principal ---
-function ReturnTable() {
+function ReturnTable({ data }: ReturnTableProps) {
   const [search, setSearch] = useState("");
-  const [data, setData] = useState<any[]>([]);
 
-  // 🔹 Busca dados do backend
-  useEffect(() => {
-    const fetchRmas = async () => {
-      try {
-        const response = await fetch("https://rmabackend-zuvt.onrender.com/rma");
-        if (!response.ok) {
-          throw new Error("Erro ao buscar RMAs");
-        }
-        const result = await response.json();
-        // O backend retorna { returns: [ ... ] }
-        setData(result.returns);
-      } catch (error) {
-        console.error("Erro ao buscar dados:", error);
-      }
-    };
-
-    fetchRmas();
-  }, []);
-
-  // 🔹 Filtro por ID
   const filtered = data.filter((item) =>
     item.id.toLowerCase().includes(search.toLowerCase())
   );

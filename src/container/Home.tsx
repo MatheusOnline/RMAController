@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import { GlobalStyle } from '../styles/GlobalStyle.tsx';
+import { useEffect, useState } from 'react';
 //components
 import CardIndex from '../components/cardIndex.tsx'
 import ReturnTable from '../components/returnTable.tsx'
-
+//Services
+import Apiget from "../services/Apiget.tsx"
 
 const HeaderPage = styled.header`
     width: 100%;
@@ -25,6 +27,20 @@ const ListCard = styled.div`
 
 
 function Home (){
+     const [data, setData] = useState<any[]>([]);
+     useEffect(() => {
+      async function fetchData() {
+        try {
+          const res = await Apiget();
+          setData(res)
+        } catch (error) {
+          console.error("Erro ao buscar dados:", error);
+        }
+      }
+    
+      fetchData();
+    }, []);
+
     return(
         <>
             <GlobalStyle />
@@ -32,13 +48,13 @@ function Home (){
                 <h1>Controle de devoluções</h1>
             </HeaderPage>
             <ListCard>
-                <CardIndex descript="Casos concluídos no Mês" count={48} color="red" />
-                <CardIndex descript="Total de Casos Ativos" count={12} color="blue" />
-                <CardIndex descript="Aguardando Recebimento/Análise" count={32} color="green" />
-                <CardIndex descript="Aguardando Recebimento/Análise" count={32} color="yellow" />
+                <CardIndex descript="Total de Casos" count={data.length} color="#125f8b" />
+                <CardIndex descript="Total de Casos Ativos" count={12} color="#125f8b" />
+                <CardIndex descript="Aguardando Recebimento/Análise" count={32} color="#125f8b" />
+                <CardIndex descript="Casos resolvidos" count={32} color="#125f8b" />
             </ListCard>
             
-            <ReturnTable/>
+            <ReturnTable data={data}/>
         
         </>
 

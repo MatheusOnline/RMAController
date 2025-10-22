@@ -8,6 +8,10 @@ const WrapCard = styled.div`
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   margin: 50px;
   padding: 16px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const ContentNumber = styled.p`
