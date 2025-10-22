@@ -127,11 +127,6 @@ const Buttoninclude = styled(Link)`
   &:hover {
     cursor: pointer;
   }
-
-   @media (max-width: 768px) {
-    
-   
-  }
 `;
 
 const ContainerButton = styled.div`
