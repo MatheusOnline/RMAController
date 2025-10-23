@@ -1,10 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./container/Home";
 import RegistrationLabel from "./container/registrationLabel"
 import ShopeeAuth from "./container/Auth";
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         
@@ -12,7 +12,7 @@ function App() {
 
         <Route path="/auth" element={<ShopeeAuth/>}/>
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 

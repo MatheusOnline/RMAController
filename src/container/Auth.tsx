@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import CryptoJS from "crypto-js";
-
+import { useSearchParams } from "react-router-dom";
 const ShopeeAuth: React.FC = () => {
   const [authUrl, setAuthUrl] = useState<string>("");
+
+   const [searchParams] = useSearchParams();
+
+  const code = searchParams.get("code");       // pode ser null se não tiver
+  const shopId = searchParams.get("shop_id");  // pode ser null se não tiver
 
   const partnerId = 2013259;
   const key = "shpk79414a436a4a64585553496764445948414c66555372416945654d7a424a";
@@ -32,6 +37,12 @@ const ShopeeAuth: React.FC = () => {
           </a>
         </p>
       )}
+
+      <div>
+      <h1>Shopee Auth</h1>
+      <p>Code: {code ?? "não fornecido"}</p>
+      <p>Shop ID: {shopId ?? "não fornecido"}</p>
+    </div>
     </div>
   );
 };
