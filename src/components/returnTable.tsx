@@ -150,6 +150,7 @@ function ReturnTable({ data }: ReturnTableProps) {
         <Title>Lista completa de RMA</Title>
         <ContainerButton>
           <Buttoninclude to={"leitor"}>Incluir manualmente</Buttoninclude>
+          <Buttoninclude to={"auth"}>Entrar</Buttoninclude>
           <Search
             type="text"
             placeholder="Buscar por Id..."
