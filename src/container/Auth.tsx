@@ -21,7 +21,7 @@ const ShopeeAuth: React.FC = () => {
     // gera HMAC SHA256
     const sign = CryptoJS.HmacSHA256(baseStr, key).toString(CryptoJS.enc.Hex);
 
-    const url = `${host}${path}?partner_id=${partnerId}&redirect=https://rma-controller.vercel.app/auth//&timestamp=${ts}&sign=${sign}`;
+    const url = `${host}${path}?partner_id=${partnerId}&redirect=https://rma-controller.vercel.app/auth/&timestamp=${ts}&sign=${sign}`;
 
     setAuthUrl(url);
   };
