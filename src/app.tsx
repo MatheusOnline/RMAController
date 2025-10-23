@@ -10,7 +10,7 @@ function App() {
         
         <Route path="/leitor" element={<RegistrationLabel />} />
 
-        <Route path="/auth:code" element={<ShopeeAuth/>}/>
+        <Route path="/auth" element={<ShopeeAuth/>}/>
       </Routes>
     </Router>
   );
