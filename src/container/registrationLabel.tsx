@@ -80,36 +80,36 @@ const RegistrationLabel: React.FC = () => {
   const [status, setStatus] = useState("Em Análise");
 
   useEffect(() => {
-  const codeReader = new BrowserQRCodeReader();
-  if (videoRef.current) {
-    codeReader
-      .decodeFromVideoDevice(null, videoRef.current!, (result, err) => {
-        if (result) {
-          setQrCode(result.getText());
-          codeReader.reset(); // Para a leitura após ler o QR
-        }
-        if (err && !(err.name === "NotFoundException")) {
-          console.error("Erro ao ler QR:", err);
-        }
-      })
-      .catch((err) => console.error("Erro ao iniciar câmera:", err));
-  }
+    const codeReader = new BrowserQRCodeReader();
+    if (videoRef.current) {
+      codeReader
+        .decodeFromVideoDevice(null, videoRef.current!, (result, err) => {
+          if (result) {
+            setQrCode(result.getText());
+            codeReader.reset(); // Para a leitura após ler o QR
+          }
+          if (err && !(err.name === "NotFoundException")) {
+            console.error("Erro ao ler QR:", err);
+          }
+        })
+        .catch((err) => console.error("Erro ao iniciar câmera:", err));
+    }
 
-  return () => codeReader.reset();
-}, []);
+    return () => codeReader.reset();
+  }, []);
 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-        await fetch("https://rmabackend-zuvt.onrender.com/rma", {
+      await fetch("https://rmabackend-zuvt.onrender.com/rma", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: qrCode, motivo, data: dataAtual, status })
       });
-      
-      
+
+
       alert("Cadastro realizado com sucesso!");
       setQrCode("");
       setMotivo("");
@@ -131,12 +131,17 @@ const RegistrationLabel: React.FC = () => {
         <Input type="text" value={qrCode} readOnly />
 
         <Label>Motivo</Label>
-        <Input
-          type="text"
+
+        <select
           value={motivo}
           onChange={(e) => setMotivo(e.target.value)}
-          required
-        />
+          >
+            <option value="">Selecione um motivo</option>
+            <option value="Defeito">Defeito</option>
+            <option value="Produto errado">Produto errado</option>
+            <option value="Garantia">Garantia</option>
+            <option value="Outro">Outro</option>
+        </select>
 
         <Label>Data</Label>
         <Input type="date" value={dataAtual} readOnly />
