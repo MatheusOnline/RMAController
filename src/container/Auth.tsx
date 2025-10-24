@@ -27,38 +27,20 @@ const ShopeeAuth: React.FC = () => {
 
   // Pega o token usando code e shopId
   const getTokenShopLevel = async () => {
-    if (!code || !shopId) return;
-
-    const ts = Math.floor(Date.now() / 1000);
-    const path = "/api/v2/auth/token/get";
-    const baseStr = `${partnerId}${path}${ts}`;
-    const sign = CryptoJS.HmacSHA256(baseStr, key).toString(CryptoJS.enc.Hex);
-
-    const url = `${host}${path}?partner_id=${partnerId}&timestamp=${ts}&sign=${sign}`;
-
-    const body = {
-      code,
-      shop_id: parseInt(shopId),
-      partner_id: partnerId
-    };
-
-    try {
-      const response = await fetch(url, {
+     try{
+        const res = await fetch("http://localhost:3000/generateToken", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(body)
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code, shop_id: shopId })
       });
 
-      const data = await response.json();
-      setToken(data.access_token);
-      setRefreshToken(data.refresh_token);
-      console.log("Token:", data.access_token);
-      console.log("Refresh Token:", data.refresh_token);
-    } catch (err) {
-      console.error("Erro ao pegar token:", err);
-    }
+      const data = await res.json();
+      console.log(data);
+      alert(data)
+     }
+     catch(error){
+      alert(error)
+     }
   };
 
   // Se code e shopId existirem, busca o token
@@ -82,8 +64,7 @@ const ShopeeAuth: React.FC = () => {
         <h1>Shopee Auth</h1>
         <p>Code: {code ?? "não fornecido"}</p>
         <p>Shop ID: {shopId ?? "não fornecido"}</p>
-        {token && <p>Access Token: {token}</p>}
-        {refreshToken && <p>Refresh Token: {refreshToken}</p>}
+       
       </div>
     </div>
   );
