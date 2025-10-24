@@ -21,11 +21,11 @@ const ShopeeAuth: React.FC = () => {
     const url = `${host}${path}?partner_id=${partnerId}&redirect=https://rma-controller.vercel.app/auth/&timestamp=${ts}&sign=${sign}`;
     setAuthUrl(url);
   };
-
+  var token = "";
   // Pega o token usando code e shopId
   const getTokenShopLevel = async () => {
     try{
-      const res = await fetch("https://rmabackend-zuvt.onrender.com/generateToken", {
+      const res = await fetch("https://rmabackend-zuvt.onrender.com/get_profile", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ code, shop_id: shopId })
@@ -33,8 +33,8 @@ const ShopeeAuth: React.FC = () => {
 
     const data = await res.json();
     console.log(data);
-    const A = data.access_token;;
-    alert(A)
+    token = data.access_token;;
+    alert(token)
     }
     catch(error){
     alert(error)
@@ -47,8 +47,28 @@ const ShopeeAuth: React.FC = () => {
     {
 
       getTokenShopLevel();
+      GetProfile();
     }
   }, [code, shopId]);
+
+  const GetProfile = async ()  => {
+    try{
+      const res = await fetch("https://rmabackend-zuvt.onrender.com/generateToken", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ access_token: token, shop_id: shopId })
+    });
+
+    const data = await res.json();
+    console.log(data);
+    const A = data;
+    alert(A)
+    }
+    catch(error){
+    alert(error)
+    }
+
+  }
 
   return (
     <div>
