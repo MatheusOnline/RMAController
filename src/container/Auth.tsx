@@ -25,7 +25,7 @@ const ShopeeAuth: React.FC = () => {
   // Pega o token usando code e shopId
   const getTokenShopLevel = async () => {
     try{
-      const res = await fetch("https://rmabackend-zuvt.onrender.com/get_profile", {
+      const res = await fetch("https://rmabackend-zuvt.onrender.com/generateToken", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ code, shop_id: shopId })
@@ -47,13 +47,13 @@ const ShopeeAuth: React.FC = () => {
     {
 
       getTokenShopLevel();
-      GetProfile();
+     
     }
   }, [code, shopId]);
-
+  
   const GetProfile = async ()  => {
     try{
-      const res = await fetch("https://rmabackend-zuvt.onrender.com/generateToken", {
+      const res = await fetch("https://rmabackend-zuvt.onrender.com/get_profile", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ access_token: token, shop_id: shopId })
