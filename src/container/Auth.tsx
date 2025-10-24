@@ -47,7 +47,7 @@ const ShopeeAuth: React.FC = () => {
     {
 
       getTokenShopLevel();
-     
+      GetProfile();
     }
   }, [code, shopId]);
   
