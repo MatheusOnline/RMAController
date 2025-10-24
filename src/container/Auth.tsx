@@ -5,7 +5,7 @@ import { useSearchParams } from "react-router-dom";
 const ShopeeAuth: React.FC = () => {
   const [authUrl, setAuthUrl] = useState<string>("");
   const [searchParams] = useSearchParams();
-
+  const [token, setToken] = useState("");
   const code = searchParams.get("code");      // pode ser null
   const shopId = searchParams.get("shop_id"); // pode ser null
 
@@ -25,25 +25,30 @@ const ShopeeAuth: React.FC = () => {
 
   // Pega o token usando code e shopId
   const getTokenShopLevel = async () => {
-     try{
-        const res = await fetch("https://rmabackend-zuvt.onrender.com/generateToken", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code, shop_id: shopId })
-      });
+    try{
+      const res = await fetch("https://rmabackend-zuvt.onrender.com/generateToken", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code, shop_id: shopId })
+    });
 
-      const data = await res.json();
-      console.log(data);
-      alert(data)
-     }
-     catch(error){
-      alert(error)
-     }
+    const data = await res.json();
+    console.log(data);
+    setToken(data.response.access_token)
+    alert(token)
+    }
+    catch(error){
+    alert(error)
+    }
   };
 
   // Se code e shopId existirem, busca o token
   useEffect(() => {
-    getTokenShopLevel();
+    if(code !== "" || shopId !=="")
+    {
+
+      getTokenShopLevel();
+    }
   }, [code, shopId]);
 
   return (
