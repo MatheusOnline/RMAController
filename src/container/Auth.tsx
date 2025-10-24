@@ -5,7 +5,6 @@ import { useSearchParams } from "react-router-dom";
 const ShopeeAuth: React.FC = () => {
   const [authUrl, setAuthUrl] = useState<string>("");
   const [searchParams] = useSearchParams();
-  const [token, setToken] = useState("");
   const code = searchParams.get("code");      // pode ser null
   const shopId = searchParams.get("shop_id"); // pode ser null
 
@@ -34,8 +33,8 @@ const ShopeeAuth: React.FC = () => {
 
     const data = await res.json();
     console.log(data);
-    setToken(data.access_token)
-    alert(token)
+    const A = data.access_token;;
+    alert(A)
     }
     catch(error){
     alert(error)
