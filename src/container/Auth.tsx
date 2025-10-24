@@ -34,7 +34,7 @@ const ShopeeAuth: React.FC = () => {
 
     const data = await res.json();
     console.log(data);
-    setToken(data.response.access_token)
+    setToken(data.access_token)
     alert(token)
     }
     catch(error){
