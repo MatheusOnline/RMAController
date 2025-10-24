@@ -28,7 +28,7 @@ const ShopeeAuth: React.FC = () => {
   // Pega o token usando code e shopId
   const getTokenShopLevel = async () => {
      try{
-        const res = await fetch("http://localhost:3000/generateToken", {
+        const res = await fetch("https://rmabackend-zuvt.onrender.com/generateToken", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code, shop_id: shopId })
