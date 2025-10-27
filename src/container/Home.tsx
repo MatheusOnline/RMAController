@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 //components
 import CardIndex from '../components/cardIndex.tsx'
 import ReturnTable from '../components/returnTable.tsx'
-
+import Header from '../components/header/header.tsx';
 //Services
 import Apiget from "../services/Apiget.tsx"
 
@@ -37,7 +37,7 @@ function Home (){
     return(
         <>
             <GlobalStyle />
-            
+            <Header/>
             <ListCard>
                 <CardIndex descript="Total de Casos" count={data.length} color="#125f8b" />
                 <CardIndex descript="Total de Casos Ativos" count={12} color="#125f8b" />

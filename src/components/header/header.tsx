@@ -5,6 +5,11 @@ function Header() {
   const [linkLogo, setLinkLogo] = useState("");
 
   useEffect(() => {
+    // Inicializa o logo do localStorage, se existir
+    const storedLogo = localStorage.getItem("logo");
+    if (storedLogo) setLinkLogo(storedLogo);
+
+    // Listener para atualizar via evento customizado
     const handleLogoUpdate = (event: Event) => {
       const customEvent = event as CustomEvent<string>;
       setLinkLogo(customEvent.detail);

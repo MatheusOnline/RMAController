@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
 import CardLink from "../components/Cards/cardLink";
-
+import Header from "../components/header/header";
 export const CardsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -70,7 +70,7 @@ const ShopeeAuth: React.FC = () => {
 
   return (
     <div>
-      
+      <Header/>
       <CardsContainer>
         <CardLink 
           img="https://cdn.awsli.com.br/800x800/2015/2015798/produto/354645871/shoppe--2--mvj1hgvttt.png" 
