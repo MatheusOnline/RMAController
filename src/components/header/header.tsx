@@ -5,8 +5,11 @@ function Header() {
   const [linkLogo, setLinkLogo] = useState("");
 
   useEffect(() => {
-    const logo = localStorage.getItem("logo");
-    if (logo) setLinkLogo(logo);
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === "logo") setLinkLogo(event.newValue || "");
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
   }, []); 
 
   return (
