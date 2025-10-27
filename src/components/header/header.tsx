@@ -15,14 +15,14 @@ function Header() {
 
       <ContainerStore>
         <Linkbutton to="/">Home</Linkbutton>
-        {linkLogo ? (
+       
           <StoreLogo>
             <img src={linkLogo} alt="Logo da loja" />
           </StoreLogo>
-          ) : (
+          
           <Linkbutton to="/auth">Conectar Loja</Linkbutton>
-          )
-        }
+          
+        
       </ContainerStore>
     </HeaderContainer>
   );
