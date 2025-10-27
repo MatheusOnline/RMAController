@@ -3,7 +3,6 @@ import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
 import CardLink from "../components/Cards/cardLink";
-import Header from "../components/header/header";
 
 export const CardsContainer = styled.div`
   display: flex;

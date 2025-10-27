@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 //components
 import CardIndex from '../components/cardIndex.tsx'
 import ReturnTable from '../components/returnTable.tsx'
-import Header from '../components/header/header.tsx';
+
 //Services
 import Apiget from "../services/Apiget.tsx"
 
