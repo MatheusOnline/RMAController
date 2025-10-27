@@ -32,7 +32,7 @@ const ShopeeAuth: React.FC = () => {
       const data = await res.json();
       console.log("Token data:", data);
       setToken(data.access_token); 
-      localStorage.setItem("token", token)
+      localStorage.setItem("token", data.access_token)
       if (shopId) {
         localStorage.setItem("shop_id", shopId);
       }
