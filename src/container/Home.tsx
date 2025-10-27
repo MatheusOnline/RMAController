@@ -37,7 +37,7 @@ function Home (){
     return(
         <>
             <GlobalStyle />
-            <Header/>
+            
             <ListCard>
                 <CardIndex descript="Total de Casos" count={data.length} color="#125f8b" />
                 <CardIndex descript="Total de Casos Ativos" count={12} color="#125f8b" />
