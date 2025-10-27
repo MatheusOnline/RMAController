@@ -64,6 +64,7 @@ const ShopeeAuth: React.FC = () => {
       const data = await res.json();
       console.log("Perfil da loja:", data);
       alert(`Loja: ${data.response.shop_name || "Sem nome"}`);
+      localStorage.setItem("logo", data.response.shop_logo)
     } catch (error) {
       console.error("Erro ao buscar perfil:", error);
       alert("Erro ao buscar perfil");
@@ -86,6 +87,7 @@ const ShopeeAuth: React.FC = () => {
         <p>Code: {code ?? "não fornecido"}</p>
         <p>Shop ID: {shopId ?? "não fornecido"}</p>
         <p>Token: {token ? "✅ Gerado" : "❌ Não gerado"}</p>
+        <img src={""+localStorage.getItem("logo")} alt="" />
       </div>
     </div>
   );
