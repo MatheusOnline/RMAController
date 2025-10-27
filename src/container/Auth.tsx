@@ -31,7 +31,11 @@ const ShopeeAuth: React.FC = () => {
 
       const data = await res.json();
       console.log("Token data:", data);
-      setToken(data.access_token); // <-- salva no estado
+      setToken(data.access_token); 
+      localStorage.setItem("token", token)
+      if (shopId) {
+        localStorage.setItem("shop_id", shopId);
+      }
     } catch (error) {
       console.error("Erro ao gerar token:", error);
       alert("Erro ao gerar token");
