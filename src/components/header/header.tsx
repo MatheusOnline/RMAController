@@ -2,24 +2,18 @@ import { HeaderContainer, Logo, Linkbutton, StoreLogo, ContainerStore } from "./
 import { useState, useEffect } from "react";
 
 function Header() {
-  const [linkLogo, setLinkLogo] = useState(localStorage.getItem("logo") || "");
+  const [linkLogo, setLinkLogo] = useState("");
 
-  // Atualiza sempre que o localStorage muda
   useEffect(() => {
-    const handleStorage = (event: StorageEvent) => {
-      if (event.key === "logo") setLinkLogo(event.newValue || "");
+    const handleLogoUpdate = (event: Event) => {
+      const customEvent = event as CustomEvent<string>;
+      setLinkLogo(customEvent.detail);
     };
-    window.addEventListener("storage", handleStorage);
 
-    // Opcional: observar mudanças do mesmo tab
-    const observer = new MutationObserver(() => {
-      setLinkLogo(localStorage.getItem("logo") || "");
-    });
-    observer.observe(document.body, { attributes: true, childList: true, subtree: true });
+    window.addEventListener("logoUpdate", handleLogoUpdate);
 
     return () => {
-      window.removeEventListener("storage", handleStorage);
-      observer.disconnect();
+      window.removeEventListener("logoUpdate", handleLogoUpdate);
     };
   }, []);
 
