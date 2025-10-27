@@ -1,28 +1,25 @@
 import React, { useState, useEffect } from "react";
-import CryptoJS from "crypto-js";
 import { useSearchParams } from "react-router-dom";
+import styled from "styled-components";
+
+import CardLink from "../components/Cards/cardLink";
+import Header from "../components/header/header";
+
+export const CardsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  padding: 2rem;
+`;
+
 
 const ShopeeAuth: React.FC = () => {
-  const [authUrl, setAuthUrl] = useState("");
   const [token, setToken] = useState("");
   const [searchParams] = useSearchParams();
 
   const code = searchParams.get("code");
   const shopId = searchParams.get("shop_id");
-
-  const partnerId = 2013259;
-  const key = "shpk79414a436a4a64585553496764445948414c66555372416945654d7a424a";
-  const host = "https://partner.shopeemobile.com";
-
-  // Gera URL de autenticação
-  const generateAuthUrl = () => {
-    const ts = Math.floor(Date.now() / 1000);
-    const path = "/api/v2/shop/auth_partner";
-    const baseStr = `${partnerId}${path}${ts}`;
-    const sign = CryptoJS.HmacSHA256(baseStr, key).toString(CryptoJS.enc.Hex);
-    const url = `${host}${path}?partner_id=${partnerId}&redirect=https://rma-controller.vercel.app/auth/&timestamp=${ts}&sign=${sign}`;
-    setAuthUrl(url);
-  };
 
   // Pega token
   const getTokenShopLevel = async () => {
@@ -62,9 +59,9 @@ const ShopeeAuth: React.FC = () => {
       });
 
       const data = await res.json();
-      console.log("Perfil da loja:", data);
-      alert(`Loja: ${data.response.shop_name || "Sem nome"}`);
       localStorage.setItem("logo", data.response.shop_logo)
+      alert(`Loja: ${data.response.shop_name || "Sem nome"}`);
+      
     } catch (error) {
       console.error("Erro ao buscar perfil:", error);
       alert("Erro ao buscar perfil");
@@ -73,22 +70,14 @@ const ShopeeAuth: React.FC = () => {
 
   return (
     <div>
-      <h1>Shopee Auth</h1>
-      <button onClick={generateAuthUrl}>Gerar URL</button>
-      {authUrl && (
-        <p>
-          <a href={authUrl} target="_blank" rel="noopener noreferrer">
-            {authUrl}
-          </a>
-        </p>
-      )}
-
-      <div>
-        <p>Code: {code ?? "não fornecido"}</p>
-        <p>Shop ID: {shopId ?? "não fornecido"}</p>
-        <p>Token: {token ? "✅ Gerado" : "❌ Não gerado"}</p>
-        <img src={""+localStorage.getItem("logo")} alt="" />
-      </div>
+      <Header/>
+      <CardsContainer>
+        <CardLink 
+          img="https://cdn.awsli.com.br/800x800/2015/2015798/produto/354645871/shoppe--2--mvj1hgvttt.png" 
+          store="Shopee" 
+          description="Conecte sua loja da shopee para controlar as devolucoes"
+        />
+      </CardsContainer>
     </div>
   );
 };

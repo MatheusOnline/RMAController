@@ -4,19 +4,12 @@ import { useEffect, useState } from 'react';
 //components
 import CardIndex from '../components/cardIndex.tsx'
 import ReturnTable from '../components/returnTable.tsx'
+import Header from '../components/header/header.tsx';
 //Services
 import Apiget from "../services/Apiget.tsx"
 
-const HeaderPage = styled.header`
-    width: 100%;
-    height: 90px;
-    border-radius: 0px 0px 25px 25px;
-    background-color: #125f8b;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF;
-`
+
+
 const ListCard = styled.div`
     width: 85%;
     display: grid;
@@ -44,9 +37,7 @@ function Home (){
     return(
         <>
             <GlobalStyle />
-            <HeaderPage>
-                <h1>Controle de devoluções</h1>
-            </HeaderPage>
+            <Header/>
             <ListCard>
                 <CardIndex descript="Total de Casos" count={data.length} color="#125f8b" />
                 <CardIndex descript="Total de Casos Ativos" count={12} color="#125f8b" />
