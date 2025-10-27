@@ -34,7 +34,7 @@ function Return(){
     
     return(
         <div>
-            <button onClick={GetReturn}></button>
+            <button onClick={GetReturn}>Buscar</button>
         </div>
     )
 }
