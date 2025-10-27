@@ -59,8 +59,9 @@ const ShopeeAuth: React.FC = () => {
       });
 
       const data = await res.json();
+      console.log(data)
       localStorage.setItem("logo", data.response.shop_logo)
-      alert(`Loja: ${data.response.shop_name || "Sem nome"}`);
+      
       
     } catch (error) {
       console.error("Erro ao buscar perfil:", error);
