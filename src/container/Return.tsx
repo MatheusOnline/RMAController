@@ -15,6 +15,8 @@ function Return(){
 
     async function GetReturn() {
     try {
+        alert(token )
+        alert(shopId)
       const res = await fetch("https://rmabackend-zuvt.onrender.com/get_return", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
