@@ -1,4 +1,4 @@
-import { HeaderContainer, Logo, Connect, StoreLogo } from "./header.style.tsx";
+import { HeaderContainer, Logo, Linkbutton, StoreLogo,ContainerStore } from "./header.style.tsx";
 import { useState, useEffect } from "react";
 
 function Header() {
@@ -13,11 +13,17 @@ function Header() {
     <HeaderContainer>
       <Logo>RMA Controller</Logo>
 
-      <Connect to="/auth">Conectar Loja</Connect>
-
-      <StoreLogo>
-        {linkLogo && <img src={linkLogo} alt="Logo da loja" />}
-      </StoreLogo>
+      <ContainerStore>
+        <Linkbutton to="/">Home</Linkbutton>
+        {linkLogo ? (
+          <StoreLogo>
+            <img src={linkLogo} alt="Logo da loja" />
+          </StoreLogo>
+          ) : (
+          <Linkbutton to="/auth">Conectar Loja</Linkbutton>
+          )
+        }
+      </ContainerStore>
     </HeaderContainer>
   );
 }

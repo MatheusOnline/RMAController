@@ -13,19 +13,15 @@ export const HeaderContainer = styled.header`
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     font-family: Arial, Helvetica, sans-serif;
     margin-bottom: 40px;
-    
-   
-  
 `;
 
 export const Logo = styled.h1`
-
   color: #fff;
   font-size: 1.5rem;
   font-weight: bold;
 `;
 
-export const Connect = styled(Link)`
+export const Linkbutton = styled(Link)`
   
   color: #fff;
   text-decoration: none;
@@ -38,4 +34,13 @@ export const StoreLogo = styled.div`
   border-radius: 50%;
   overflow: hidden;
   border: 1px solid white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+export const ContainerStore = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
 `
