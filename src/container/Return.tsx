@@ -26,8 +26,8 @@ function Return() {
       const data = await res.json();
       console.log("Resposta da Shopee:", JSON.stringify(data, null, 2));
 
-      if (data && data.return_list) {
-        setReturns(data.return_list);
+      if (data && data.response.return) {
+        setReturns(data.response.return);
       } else {
         alert("Nenhum dado encontrado");
       }
