@@ -105,7 +105,7 @@ function Return() {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredReturns.map((ret, index =+ 1) => (
+                        {filteredReturns.map((ret, index) => (
                             <tr
                                 key={ret.return_sn}
                                 style={{
@@ -118,7 +118,7 @@ function Return() {
                                 }}
                             >
                                 <td style={{ padding: "8px", border: "1px solid #ddd" }}>
-                                    {index || "-"}
+                                    {index + 1 || "-"}
                                 </td>
                                 <td style={{ padding: "8px", border: "1px solid #ddd" }}>
                                     {ret.user?.username || "-"}
