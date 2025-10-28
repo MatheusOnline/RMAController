@@ -24,8 +24,8 @@ function Return() {
                     body: JSON.stringify({ token, shop_id: shopId }), }); 
             const data = await res.json(); 
             console.log("Resposta da Shopee:", JSON.stringify(data, null, 2)); 
-            if (data && data.response.return) 
-                { setReturns(data.response.return); } 
+            if (data && data.return_list) 
+                { setReturns(data.return_list); } 
             else { alert("Nenhum dado encontrado"); } } catch (error) { console.error("Erro ao buscar devoluções:", error); alert("Erro ao buscar devoluções"); } finally { setLoading(false); } }
 
     // lista filtrada pelo nome
