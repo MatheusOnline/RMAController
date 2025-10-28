@@ -28,7 +28,12 @@ function Return() {
                 });
             const data = await res.json();
            
-            console.log("Resposta da Shopee:", JSON.stringify(data, null, 2));
+           const devolucoes = data.devolucoes_reembolsos || [];
+            const cancelamentos = data.cancelamentos || [];
+
+            // junta tudo se quiser exibir na mesma tabela
+            const tudo = [...devolucoes, ...cancelamentos];
+            console.log(tudo)
             if (data && data.return_list) 
             { 
                 setReturns(data.return_list); 
