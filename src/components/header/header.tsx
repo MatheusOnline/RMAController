@@ -26,6 +26,7 @@ function Header() {
     <HeaderContainer>
       <Logo>RMA Controller</Logo>
       <ContainerStore>
+        <Linkbutton to="/return">Devoluçoes</Linkbutton>
         <Linkbutton to="/">Home</Linkbutton>
         <StoreLogo>
           <img src={linkLogo} alt="Logo da loja" />
