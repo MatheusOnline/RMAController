@@ -71,6 +71,7 @@ function Return() {
                 >
                     <thead>
                         <tr style={{ backgroundColor: "#f2f2f2" }}>
+                            <th style={{ padding: "8px", border: "1px solid #ddd" }}>ID</th>
                             <th style={{ padding: "8px", border: "1px solid #ddd" }}>Usuário</th>
                             <th style={{ padding: "8px", border: "1px solid #ddd" }}>Pedido</th>
                             <th style={{ padding: "8px", border: "1px solid #ddd" }}>Devolução</th>
@@ -82,7 +83,7 @@ function Return() {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredReturns.map((ret) => (
+                        {filteredReturns.map((ret,index) => (
                             <tr
                                 key={ret.return_sn}
                                 style={{
@@ -94,6 +95,9 @@ function Return() {
                                                 : "#fff",
                                 }}
                             >
+                                <td style={{ padding: "8px", border: "1px solid #ddd" }}>
+                                    {index || "-"}
+                                </td>
                                 <td style={{ padding: "8px", border: "1px solid #ddd" }}>
                                     {ret.user?.username || "-"}
                                 </td>
