@@ -26,10 +26,11 @@ function Return() {
       const data = await res.json();
       console.log("Resposta da Shopee:", JSON.stringify(data, null, 2));
 
-      setReturns(data?.return_list ?? []);
-        if (!data?.return_list?.length) {
+      if (data && data.response.return) {
+        setReturns(data.response.return);
+      } else {
         alert("Nenhum dado encontrado");
-        }
+      }
     } catch (error) {
       console.error("Erro ao buscar devoluções:", error);
       alert("Erro ao buscar devoluções");
