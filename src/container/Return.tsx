@@ -5,6 +5,7 @@ function Return() {
   const [shopId, setShopId] = useState("");
   const [returns, setReturns] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(""); // filtro pelo nome
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -26,8 +27,8 @@ function Return() {
       const data = await res.json();
       console.log("Resposta da Shopee:", JSON.stringify(data, null, 2));
 
-      if (data && data.response.return) {
-        setReturns(data.response.return);
+      if (data && data.return_list && data.return_list.length > 0) {
+        setReturns(data.return_list);
       } else {
         alert("Nenhum dado encontrado");
       }
@@ -38,6 +39,11 @@ function Return() {
       setLoading(false);
     }
   }
+
+  // lista filtrada pelo nome
+  const filteredReturns = returns.filter((ret) =>
+    ret.user?.username?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div style={{ padding: "20px", fontFamily: "Arial" }}>
@@ -56,7 +62,17 @@ function Return() {
         {loading ? "Carregando..." : "Buscar Devoluções"}
       </button>
 
-      {returns.length > 0 ? (
+      <div style={{ marginBottom: "20px" }}>
+        <input
+          type="text"
+          placeholder="Buscar pelo nome"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style={{ padding: "8px", width: "300px", borderRadius: "4px", border: "1px solid #ccc" }}
+        />
+      </div>
+
+      {filteredReturns.length > 0 ? (
         <table
           style={{
             width: "100%",
@@ -78,7 +94,7 @@ function Return() {
             </tr>
           </thead>
           <tbody>
-            {returns.map((ret) => (
+            {filteredReturns.map((ret) => (
               <tr
                 key={ret.return_sn}
                 style={{
