@@ -48,6 +48,12 @@ function Return() {
         ret.user?.username?.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+   function DateTransformer(date: string) {
+        const dateNumber = Number(date); // converte para número
+        const data = new Date(dateNumber * 1000); // Shopee envia em segundos, JS usa milissegundos
+        return data.toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+        }
+
     return (
         <>
         <Header/>
@@ -105,6 +111,7 @@ function Return() {
                                 <th style={{ padding: "8px", border: "1px solid #ddd" }}>Valor (R$)</th>
                                 <th style={{ padding: "8px", border: "1px solid #ddd" }}>Produto</th>
                                 <th style={{ padding: "8px", border: "1px solid #ddd" }}>Rastreio</th>
+                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Data criada'</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -146,6 +153,9 @@ function Return() {
                                     </td>
                                     <td style={{ padding: "8px", border: "1px solid #ddd" }}>
                                         {ret.tracking_number || "-"}
+                                    </td>
+                                    <td style={{ padding: "8px", border: "1px solid #ddd" }}>
+                                        {DateTransformer(ret.create_time) || "-"}
                                     </td>
                                 </tr>
                             ))}
