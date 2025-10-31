@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 //=========Styles========//
-import {Page, FunctionBar, ButtonRefresh, RefreshIcon, ContainerInput, InputSeach, SeachIcon, ContainerNotreturn, WapperNoReturn, TextNoReturn, TableReturn, ContainerPage, LoadScreen, Spinner } from "./style";
+import {Page, FunctionBar, ButtonRefresh, RefreshIcon, ContainerInput, InputSeach, SeachIcon, ContainerNotreturn, WapperNoReturn, TextNoReturn, TableReturn, ContainerPage, LoadScreen, Spinner, SelectStatus,ContainerSelect } from "./style";
 
 //=======COMPONENTES========//
 import Header from "../../components/header/header";
@@ -100,7 +100,7 @@ function Return() {
         return translations[reason.toUpperCase() || reason]
     }
 
-    //========FILTRA AS DEVOLUCOES PELO NOME========//
+    //========FILTRA AS DEVOLUCOES PELO NOME E PELO ESTATUS========//
    const filteredReturns = returns.filter((ret) => {
         // filtro por nome digitado
         const buyerMatch = ret.buyerName.toLowerCase().includes(searchTerm.toLowerCase());
@@ -142,15 +142,18 @@ function Return() {
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}/>
                         </ContainerInput>
-                        <p>{status}</p>
-                        <select value={status} onChange={(e) => setStatus(e.target.value)}>
-                            <option value="Aceito">Aceito</option>
-                            <option value="Processamento">Processamento</option>
-                            <option value="Cancelado">Cancelado</option>
-                            <option value="Solicitada">Solicitada</option>
+                      
+                        <ContainerSelect >
+                           
+                            <SelectStatus value={status} onChange={(e) => setStatus(e.target.value)}>
+                                <option value="">Filtre pelo status</option>
+                                <option value="Aceito">Aceito</option>
+                                <option value="Processamento">Processamento</option>
+                                <option value="Cancelado">Cancelado</option>
+                                <option value="Solicitada">Solicitada</option>
 
-                        </select>
-
+                            </SelectStatus>
+                        </ContainerSelect>
                     </FunctionBar>
 
                     {filteredReturns.length > 0 ? 

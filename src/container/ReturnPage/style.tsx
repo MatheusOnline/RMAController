@@ -132,3 +132,17 @@ export const Spinner = styled.div`
   height: 60px;
   animation: ${spin} 1s linear infinite;
 `;
+
+export const ContainerSelect = styled.div`
+    width: 200px;
+    height: 100%;
+    display: flex;
+    align-items: center
+`;
+export const SelectStatus = styled.select`
+    background-color: #125f8bae;
+    color: aliceblue;
+    width: 90%;
+    height: 100%;
+    border-radius: 6px;
+`
