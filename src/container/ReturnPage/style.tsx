@@ -5,6 +5,11 @@ import { LuRefreshCcw } from "react-icons/lu";
 import { BsSearch } from "react-icons/bs";
 
 
+export const ContainerPage = styled.div`
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+`
+
 export const FunctionBar = styled.div`
     width: 100%;
     height: 40px;
@@ -13,7 +18,7 @@ export const FunctionBar = styled.div`
     margin-bottom: 50px;
     gap: 35px;
 
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid #c7c7c7;
     padding-bottom: 20px;
 `
 
@@ -92,4 +97,8 @@ export const WapperNoReturn = styled.div`
 export const TextNoReturn = styled.p`
     font-size: 18px;
     color: aliceblue;
+`
+
+export const TableReturn = styled.table`
+    width: 100%;
 `

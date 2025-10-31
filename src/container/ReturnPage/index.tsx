@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 //=========Styles========//
-import { FunctionBar, ButtonRefresh, RefreshIcon, ContainerInput, InputSeach, SeachIcon, ContainerNotreturn, WapperNoReturn,TextNoReturn } from "./style";
+import { FunctionBar, ButtonRefresh, RefreshIcon, ContainerInput, InputSeach, SeachIcon, ContainerNotreturn, WapperNoReturn, TextNoReturn, TableReturn, ContainerPage } from "./style";
 
 //=======COMPONENTES========//
 import Header from "../../components/header/header";
@@ -14,16 +14,24 @@ function Return() {
     const [searchTerm, setSearchTerm] = useState("");
     
 
+    var storedToken:string;
+    var storedShopId:string;
     //=========FUNCAO CHAMADA NA HORA QUE A PAGINA É CARREGADA======//
     useEffect(() => {
-        const storedToken = localStorage.getItem("token") || "";
-        const storedShopId = localStorage.getItem("shop_id") || "";
+        storedToken = localStorage.getItem("token") || "";
+        storedShopId = localStorage.getItem("shop_id") || "";
 
 
+       CallFunctionReturn()
+    }, []);
+
+    function CallFunctionReturn(){
         if (storedToken && storedShopId) {
             GetReturn(storedToken, storedShopId);
+        }else{
+            alert("Token ou Id da loja está faltando")
         }
-    }, []);
+    }
 
     //=========FUNCAO PARA BUSCAR AS DEVOLUCOS NO BACKEND==========//
     async function GetReturn(tokenParam: string, shopIdParam: string) {
@@ -72,10 +80,10 @@ function Return() {
     return (
         <>
             <Header/>
-            <div style={{ padding: "20px", fontFamily: "Arial" }}>
+            <ContainerPage>
                 
                 <FunctionBar>
-                    <ButtonRefresh><RefreshIcon/></ButtonRefresh>
+                    <ButtonRefresh onSubmit={CallFunctionReturn}><RefreshIcon/></ButtonRefresh>
 
                     <ContainerInput>
                         <SeachIcon/>
@@ -84,21 +92,20 @@ function Return() {
                             placeholder="Buscar pelo nome"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            
                         />
                     </ContainerInput>
                 </FunctionBar>
 
                 {filteredReturns.length > 0 ? (
-                    <table style={{ width: "100%" }}>
-                            {filteredReturns.map((ret, index) => (
-                               <ReturnCard  key={index} datas={ret} />
-                            ))}
-                    </table>
+                    <TableReturn>
+                        {filteredReturns.map((ret, index) => (
+                            <ReturnCard  key={index} datas={ret} />
+                        ))}
+                    </TableReturn>
                 ) : (
                     !loading && <ContainerNotreturn><WapperNoReturn><TextNoReturn>Nenhuma devolução encontrada.</TextNoReturn></WapperNoReturn></ContainerNotreturn>
                 )}
-            </div>
+            </ContainerPage>
         </>
     );
 }
