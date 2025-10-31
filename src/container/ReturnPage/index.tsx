@@ -56,7 +56,7 @@ function Return() {
                         id_request: ret.return_sn || "",
                         productImg: ret.item?.[0]?.images?.[0] || "",
                         productDescript: ret.item?.[0]?.name || "",
-                        reason: ret.reason || ret.text_reason || "",
+                        reason: translateReason(ret.reason),
                         status: translateStatus(ret.status),
                         item_price: ret.item_price || "",
                         dateCreated: new Date(ret.create_time * 1000).toLocaleDateString("pt-BR"),
@@ -73,6 +73,7 @@ function Return() {
             }
     }
 
+      //=========FUNCAO PARA TRADUZIR O STATUS==========//
     function translateStatus(status:string){
         const translations: Record<string, string> = {
             ACCEPTED: "Aceito",
@@ -82,6 +83,21 @@ function Return() {
             COMPLETED: "Concluído"
         };
         return translations[status.toUpperCase()] || status
+    }
+    
+    //===========FUNCAO PARA TRADUZIR A REAÇAO==========//
+    function translateReason(reason:string){
+        const translations: Record<string, string> = {
+            ITEM_MISSING: "ITEM FALTANDO",
+            FUNCTIONAL_DMG: "FUNCIONAL COM DANO",
+            DAMAGED_OTHERS:"DEMAIS TIPOS DE DANO",
+            NOT_RECEIPT: "NÃO RECEBI",
+            CHANGE_MIND: "MUDEI DE IDEIA",
+            WRONG_ITEM: "ITEM ERRADO",
+            OUTER_DAMAGED_PACKAGE: "EMBALAGE DANIFICADA"   
+        }
+
+        return translations[reason.toUpperCase() || reason]
     }
 
     //========FILTRA AS DEVOLUCOES PELO NOME========//
