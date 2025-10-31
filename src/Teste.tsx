@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./container/Home";
 import RegistrationLabel from "./container/registrationLabel"
 import ShopeeAuth from "./container/Auth";
-import Return from "./container/Return";
+import Return from "./container/ReturnPage";
 
 function Teste() {
   return (
