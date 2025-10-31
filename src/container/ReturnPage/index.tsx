@@ -18,11 +18,10 @@ function Return() {
     var storedShopId:string;
     //=========FUNCAO CHAMADA NA HORA QUE A PAGINA É CARREGADA======//
     useEffect(() => {
-       
-
        CallFunctionReturn()
     }, []);
 
+    //=========FUNCAO PARA CHAMAR A FUNÇAO DE DEVOLUÇOES======//
     function CallFunctionReturn(){
         storedToken = localStorage.getItem("token") || "";
         storedShopId = localStorage.getItem("shop_id") || "";
@@ -35,8 +34,8 @@ function Return() {
         }
     }
 
-    //=========FUNCAO PARA BUSCAR AS DEVOLUCOS NO BACKEND==========//
-    async function GetReturn(tokenParam: string, shopIdParam: string) {
+    //=========FUNCAO PARA BUSCAR AS DEVOLUÇOS NO BACKEND==========//
+    async function GetReturn(tokenParam: string, shopIdParam: string){
         try {
                 
             setLoading(true);
@@ -58,7 +57,7 @@ function Return() {
                         productImg: ret.item?.[0]?.images?.[0] || "",
                         productDescript: ret.item?.[0]?.name || "",
                         reason: ret.reason || ret.text_reason || "",
-                        status: ret.status || "",
+                        status: translateStatus(ret.status),
                         item_price: ret.item_price || "",
                         dateCreated: new Date(ret.create_time * 1000).toLocaleDateString("pt-BR"),
                 }));
@@ -72,52 +71,64 @@ function Return() {
         } finally{ 
             setLoading(false); 
             }
-        }
+    }
+
+    function translateStatus(status:string){
+        const translations: Record<string, string> = {
+            ACCEPTED: "Aceito",
+            CANCELLED: "Cancelado",
+            PROCESSING: "Processamento",
+            REQUESTED: "Solicitada",
+            COMPLETED: "Concluído"
+        };
+        return translations[status.toUpperCase()] || status
+    }
 
     //========FILTRA AS DEVOLUCOES PELO NOME========//
     const filteredReturns = returns.filter((ret) =>
         ret.buyerName.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+
     return (
         <Page>
             <Header/>
-            {loading ? (
+            {loading ? 
+            (
                 <LoadScreen>
                     <Spinner></Spinner>
                 </LoadScreen>
+            ) 
+            : 
+            (
+                <ContainerPage>     
+                    <FunctionBar>
+                        <ButtonRefresh onClick={CallFunctionReturn}><RefreshIcon/></ButtonRefresh>
+                        <ContainerInput>
+                            <SeachIcon/>
+                            <InputSeach
+                                type="text"
+                                placeholder="Buscar pelo nome"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}/>
+                        </ContainerInput>
+                    </FunctionBar>
 
-            ) : (
-            
-            <ContainerPage>
-                
-                <FunctionBar>
-                    <ButtonRefresh onClick={CallFunctionReturn}><RefreshIcon/></ButtonRefresh>
-
-                    <ContainerInput>
-                        <SeachIcon/>
-                        <InputSeach
-                            type="text"
-                            placeholder="Buscar pelo nome"
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                    </ContainerInput>
-                </FunctionBar>
-
-                {filteredReturns.length > 0 ? (
-                    <TableReturn>
-                        {filteredReturns.map((ret, index) => (
-                            <ReturnCard  key={index} datas={ret} />
-                        ))}
-                    </TableReturn>
-                ) : (
-                    !loading && <ContainerNotreturn><WapperNoReturn><TextNoReturn>Nenhuma devolução encontrada.</TextNoReturn></WapperNoReturn></ContainerNotreturn>
-                )}
-            </ContainerPage>
+                    {filteredReturns.length > 0 ? 
+                    (
+                        <TableReturn>
+                            {filteredReturns.map((ret, index) => (
+                                <ReturnCard  key={index} datas={ret} />
+                            ))}
+                        </TableReturn>
+                    ) 
+                    : 
+                    (
+                        !loading && <ContainerNotreturn><WapperNoReturn><TextNoReturn>Nenhuma devolução encontrada.</TextNoReturn></WapperNoReturn></ContainerNotreturn>
+                    )}
+                </ContainerPage>
             )}
         </Page>
-        
     );
 }
 
