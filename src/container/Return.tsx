@@ -20,7 +20,12 @@ function Return() {
         const storedShopId = localStorage.getItem("shop_id");
         if (storedShopId) setShopId(storedShopId);
 
-        GetReturn()
+
+        if (storedToken && storedShopId) {
+            GetReturn();
+        }else{
+            alert("faltando token")
+        }
     }, []);
 
     async function GetReturn() {
