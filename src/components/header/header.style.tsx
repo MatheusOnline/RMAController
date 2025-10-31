@@ -12,7 +12,7 @@ export const HeaderContainer = styled.header`
     padding: 0 2rem;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     font-family: Arial, Helvetica, sans-serif;
-    margin-bottom: 40px;
+   
 `;
 
 export const Logo = styled.h1`

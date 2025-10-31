@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 //=========Styles========//
-import { FunctionBar, ButtonRefresh, RefreshIcon, ContainerInput, InputSeach, SeachIcon, ContainerNotreturn, WapperNoReturn, TextNoReturn, TableReturn, ContainerPage } from "./style";
+import {Page, FunctionBar, ButtonRefresh, RefreshIcon, ContainerInput, InputSeach, SeachIcon, ContainerNotreturn, WapperNoReturn, TextNoReturn, TableReturn, ContainerPage, LoadScreen, Spinner } from "./style";
 
 //=======COMPONENTES========//
 import Header from "../../components/header/header";
@@ -78,12 +78,19 @@ function Return() {
     );
 
     return (
-        <>
+        <Page>
             <Header/>
+            {!loading ? (
+                <LoadScreen>
+                    <Spinner></Spinner>
+                </LoadScreen>
+
+            ) : (
+            
             <ContainerPage>
                 
                 <FunctionBar>
-                    <ButtonRefresh onSubmit={CallFunctionReturn}><RefreshIcon/></ButtonRefresh>
+                    <ButtonRefresh onClick={CallFunctionReturn}><RefreshIcon/></ButtonRefresh>
 
                     <ContainerInput>
                         <SeachIcon/>
@@ -106,7 +113,9 @@ function Return() {
                     !loading && <ContainerNotreturn><WapperNoReturn><TextNoReturn>Nenhuma devolução encontrada.</TextNoReturn></WapperNoReturn></ContainerNotreturn>
                 )}
             </ContainerPage>
-        </>
+            )}
+        </Page>
+        
     );
 }
 

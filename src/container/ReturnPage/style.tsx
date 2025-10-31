@@ -1,12 +1,17 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 
 //=========ICONS=========//
 import { LuRefreshCcw } from "react-icons/lu";
 import { BsSearch } from "react-icons/bs";
 
+export const Page = styled.main`
+    width: 100%;
+`
 
 export const ContainerPage = styled.div`
-    padding: 20px;
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
     font-family: Arial, Helvetica, sans-serif;
 `
 
@@ -102,3 +107,28 @@ export const TextNoReturn = styled.p`
 export const TableReturn = styled.table`
     width: 100%;
 `
+
+const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
+export const LoadScreen = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.8);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Spinner = styled.div`
+  border: 6px solid #ccc;
+  border-top: 6px solid #007bff;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: ${spin} 1s linear infinite;
+`;
