@@ -1,4 +1,4 @@
-import { HeaderCard, ProfileImg } from "./style";
+import { HeaderCard, ProfileImg, Card } from "./style";
 
 interface ReturnData {
   portrait: string;
@@ -18,7 +18,7 @@ interface Props {
 
 function ReturnCard({ datas }: Props) {
   return (
-    <tr>
+    <Card>
         <HeaderCard style={{ display: "flex", alignItems: "center", gap: "8px" }}>
           <ProfileImg src={datas.portrait} alt="Imagem de perfil" />
           <p>{datas.buyerName}</p>
@@ -33,7 +33,7 @@ function ReturnCard({ datas }: Props) {
         <td>{datas.reason}</td>
         <td>{datas.status}</td>
         <td>{datas.dateCreated}</td>
-    </tr>
+    </Card>
   );
 }
 
