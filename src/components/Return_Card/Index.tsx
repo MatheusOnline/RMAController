@@ -1,5 +1,3 @@
-import { Img } from "../Cards/cardLink.style";
-
 import { HeaderCard, ProfileImg } from "./style";
 
 interface ReturnData {
