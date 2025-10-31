@@ -80,7 +80,7 @@ function Return() {
     return (
         <Page>
             <Header/>
-            {!loading ? (
+            {loading ? (
                 <LoadScreen>
                     <Spinner></Spinner>
                 </LoadScreen>
