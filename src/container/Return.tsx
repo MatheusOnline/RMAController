@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 
 import Header from "../components/header/header";
 
+//=======COMPONENTES========//
+import ReturnCard from "../components/Return_Card/Index";
+
 function Return() {
     const [token, setToken] = useState("");
     const [shopId, setShopId] = useState("");
@@ -30,16 +33,32 @@ function Return() {
                 });
             const data = await res.json();
 
-            console.log("Resposta da Shopee:", JSON.stringify(data, null, 2));
             if (data && data.return_list) {
-                setReturns(data.return_list);
+                const mappedReturns = data.return_list.map((ret: any) => {
+                    const item = ret.item?.[0];
+                    return {
+                    portrait: ret.user?.portrait || "",
+                    buyerName: ret.user?.username || "Sem nome",
+                    id_order: ret.order_sn || "-",
+                    id_request: ret.return_sn || "-",
+                    productImg: item?.images?.[0] || ret.image?.[0] || "",
+                    productDescript: item?.name || "Sem descrição",
+                    reason: ret.reason || "Sem motivo",
+                    status: ret.status || "Desconhecido",
+                    dateCreated: new Date(ret.create_time * 1000).toLocaleString("pt-BR", {
+                        timeZone: "America/Sao_Paulo",
+                    }),
+                    };
+                });
+
+                setReturns(mappedReturns);
             }
             else {
                 alert("Nenhum dado encontrado");
             }
         } catch (error) {
             console.error("Erro ao buscar devoluções:", error);
-            alert("Erro ao buscar devoluções");
+            alert("Erro ao buscar devoluçõesaaaa");
         } finally { setLoading(false); }
     }
 
@@ -47,12 +66,6 @@ function Return() {
     const filteredReturns = returns.filter((ret) =>
         ret.user?.username?.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
-   function DateTransformer(date: string) {
-        const dateNumber = Number(date); // converte para número
-        const data = new Date(dateNumber * 1000); // Shopee envia em segundos, JS usa milissegundos
-        return data.toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
-        }
 
     return (
         <>
@@ -116,49 +129,9 @@ function Return() {
                         </thead>
                         <tbody>
                             {filteredReturns.map((ret, index) => (
-                                <tr
-                                    key={ret.return_sn}
-                                    style={{
-                                        backgroundColor:
-                                            ret.status === "CANCELLED"
-                                                ? "#ffd6d6"
-                                                : ret.status === "ACCEPTED"
-                                                    ? "#d6ffd6"
-                                                    : "#fff",
-                                    }}
-                                >
-                                    <td style={{ padding: "8px", border: "1px solid #ddd" }}>
-                                        {index + 1 || "-"}
-                                    </td>
-                                    <td style={{ padding: "8px", border: "1px solid #ddd" }}>
-                                        {ret.user?.username || "-"}
-                                    </td>
-                                    <td style={{ padding: "8px", border: "1px solid #ddd" }}>
-                                        {ret.order_sn}
-                                    </td>
-                                    <td style={{ padding: "8px", border: "1px solid #ddd" }}>
-                                        {ret.return_sn}
-                                    </td>
-                                    <td style={{ padding: "8px", border: "1px solid #ddd" }}>
-                                        {ret.status}
-                                    </td>
-                                    <td style={{ padding: "8px", border: "1px solid #ddd" }}>
-                                        {ret.reason || ret.text_reason || "-"}
-                                    </td>
-                                    <td style={{ padding: "8px", border: "1px solid #ddd" }}>
-                                        {ret.refund_amount ? ret.refund_amount / 100 : "-"}
-                                    </td>
-                                    <td style={{ padding: "8px", border: "1px solid #ddd" }}>
-                                        {ret.item?.[0]?.name || "-"}
-                                    </td>
-                                    <td style={{ padding: "8px", border: "1px solid #ddd" }}>
-                                        {ret.tracking_number || "-"}
-                                    </td>
-                                    <td style={{ padding: "8px", border: "1px solid #ddd" }}>
-                                        {DateTransformer(ret.create_time) || "-"}
-                                    </td>
-                                </tr>
+                               <ReturnCard  key={index} datas={ret} />
                             ))}
+                            
                         </tbody>
                     </table>
                 ) : (
