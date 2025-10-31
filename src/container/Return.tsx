@@ -14,21 +14,18 @@ function Return() {
     
 
     useEffect(() => {
-        const storedToken = localStorage.getItem("token");
-        if (storedToken) setToken(storedToken);
+    const storedToken = localStorage.getItem("token") || "";
+    const storedShopId = localStorage.getItem("shop_id") || "";
 
-        const storedShopId = localStorage.getItem("shop_id");
-        if (storedShopId) setShopId(storedShopId);
+    if (storedToken) setToken(storedToken);
+    if (storedShopId) setShopId(storedShopId);
 
+    if (storedToken && storedShopId) {
+        GetReturn(storedToken, storedShopId);
+    }
+}, []);
 
-        if (storedToken && storedShopId) {
-            GetReturn();
-        }else{
-            alert("faltando token")
-        }
-    }, []);
-
-    async function GetReturn() {
+   async function GetReturn(tokenParam: string, shopIdParam: string) {
         try {
             
             setLoading(true);
@@ -36,7 +33,7 @@ function Return() {
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ token, shop_id: shopId }),
+                    body: JSON.stringify({ token:tokenParam, shop_id: shopIdParam }),
                 });
             const data = await res.json();
 
