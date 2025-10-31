@@ -6,8 +6,7 @@ import Header from "../components/header/header";
 import ReturnCard from "../components/Return_Card/Index";
 
 function Return() {
-    const [token, setToken] = useState("");
-    const [shopId, setShopId] = useState("");
+    
     const [returns, setReturns] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState(""); // filtro pelo nome
@@ -17,8 +16,6 @@ function Return() {
     const storedToken = localStorage.getItem("token") || "";
     const storedShopId = localStorage.getItem("shop_id") || "";
 
-    if (storedToken) setToken(storedToken);
-    if (storedShopId) setShopId(storedShopId);
 
     if (storedToken && storedShopId) {
         GetReturn(storedToken, storedShopId);
