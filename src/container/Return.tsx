@@ -58,10 +58,30 @@ function Return() {
         } finally { setLoading(false); }
     }
 
+     const test = [
+  {
+    portrait: "http://mms.img.susercontent.com/br-11134233-7r98o-m83jwszjfboxc8",
+    buyerName: "elizgranetto",
+    id_order: "251017BUP2PEHK",
+    id_request: "2510310GD39JGUB",
+    productImg: "http://mms.img.susercontent.com/br-11134207-7r98o-m5vhvcljjts5f7",
+    productDescript: "Cama pet confortável estofada elegante - PROMOÇÃO IMPERDIVEL",
+    reason: "ITEM_MISSING",
+    status: "ACCEPTED",
+    dateCreated: "20/10/25",
+  }
+];
+
+
     // lista filtrada pelo nome
-    const filteredReturns = returns.filter((ret) =>
+    const filteredReturns = test.filter((ret) =>
         ret.buyerName.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+
+   
+
+
 
     return (
         <>

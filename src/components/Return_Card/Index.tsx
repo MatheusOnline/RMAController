@@ -1,5 +1,7 @@
 import { HeaderCard, ProfileImg, Card } from "./style";
 
+
+
 interface ReturnData {
   portrait: string;
   buyerName: string;

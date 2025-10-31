@@ -8,7 +8,7 @@ export const HeaderCard = styled.div`
 `
 
 export const ProfileImg = styled.img`
-    width: 20%;
+    width: 50px;
     border-radius: 50%;
 `
 
