@@ -18,14 +18,16 @@ function Return() {
     var storedShopId:string;
     //=========FUNCAO CHAMADA NA HORA QUE A PAGINA É CARREGADA======//
     useEffect(() => {
-        storedToken = localStorage.getItem("token") || "";
-        storedShopId = localStorage.getItem("shop_id") || "";
-
+       
 
        CallFunctionReturn()
     }, []);
 
     function CallFunctionReturn(){
+        storedToken = localStorage.getItem("token") || "";
+        storedShopId = localStorage.getItem("shop_id") || "";
+
+
         if (storedToken && storedShopId) {
             GetReturn(storedToken, storedShopId);
         }else{
