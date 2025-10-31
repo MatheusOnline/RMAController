@@ -19,6 +19,8 @@ function Return() {
 
         const storedShopId = localStorage.getItem("shop_id");
         if (storedShopId) setShopId(storedShopId);
+
+        GetReturn()
     }, []);
 
     async function GetReturn() {
@@ -68,9 +70,7 @@ function Return() {
         <Header/>
             <div style={{ padding: "20px", fontFamily: "Arial" }}>
 
-                <button onClick={GetReturn}>
-                    {loading ? "Carregando..." : "Buscar Devoluções"}
-                </button>
+                
 
                 <div style={{ marginBottom: "20px" }}>
                     <input
@@ -83,7 +83,7 @@ function Return() {
                 </div>
 
                 {filteredReturns.length > 0 ? (
-                    <table>
+                    <table style={{ width: "100%" }}>
                             {filteredReturns.map((ret, index) => (
                                <ReturnCard  key={index} datas={ret} />
                             ))}
