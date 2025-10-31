@@ -102,9 +102,21 @@ function Return() {
 
     //========FILTRA AS DEVOLUCOES PELO NOME========//
    const filteredReturns = returns.filter((ret) => {
+        // filtro por nome digitado
         const buyerMatch = ret.buyerName.toLowerCase().includes(searchTerm.toLowerCase());
-        const statusMatch = ret.status.toLowerCase().includes(searchTerm.toLowerCase());
-    return buyerMatch || statusMatch; // mostra se bater em nome OU status
+
+        // status traduzido 
+        const statusTraduzido = ret.status.toLowerCase();
+
+        // busca por texto digitado (pode ser nome ou status)
+        const searchMatch = statusTraduzido.includes(searchTerm.toLowerCase());
+
+        // filtro pelo select (se o select estiver vazio, ignora)
+        const statusFilter =
+            status === "" || statusTraduzido === status.toLowerCase();
+
+        // resultado final
+        return (buyerMatch || searchMatch) && statusFilter;
     });
 
 
