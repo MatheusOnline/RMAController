@@ -12,7 +12,7 @@ function Return() {
     const [returns, setReturns] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
-    
+    const [status, setStatus] = useState("")
 
     var storedToken:string;
     var storedShopId:string;
@@ -101,9 +101,11 @@ function Return() {
     }
 
     //========FILTRA AS DEVOLUCOES PELO NOME========//
-    const filteredReturns = returns.filter((ret) =>
-        ret.buyerName.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+   const filteredReturns = returns.filter((ret) => {
+        const buyerMatch = ret.buyerName.toLowerCase().includes(searchTerm.toLowerCase());
+        const statusMatch = ret.status.toLowerCase().includes(searchTerm.toLowerCase());
+    return buyerMatch || statusMatch; // mostra se bater em nome OU status
+    });
 
 
     return (
@@ -128,6 +130,15 @@ function Return() {
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}/>
                         </ContainerInput>
+                        <p>{status}</p>
+                        <select value={status} onChange={(e) => setStatus(e.target.value)}>
+                            <option value="Aceito">Aceito</option>
+                            <option value="Processamento">Processamento</option>
+                            <option value="Cancelado">Cancelado</option>
+                            <option value="Solicitada">Solicitada</option>
+
+                        </select>
+
                     </FunctionBar>
 
                     {filteredReturns.length > 0 ? 
