@@ -11,7 +11,7 @@ function Return() {
     const [returns, setReturns] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState(""); // filtro pelo nome
-    const [day, setDays] = useState("");
+    
 
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
@@ -23,13 +23,13 @@ function Return() {
 
     async function GetReturn() {
         try {
-            const days = parseInt(day)
+            
             setLoading(true);
             const res = await fetch("https://rmabackend-zuvt.onrender.com/get_return",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ token, shop_id: shopId, days }),
+                    body: JSON.stringify({ token, shop_id: shopId }),
                 });
             const data = await res.json();
 
@@ -44,6 +44,7 @@ function Return() {
                     productDescript: ret.item?.[0]?.name || "",
                     reason: ret.reason || ret.text_reason || "",
                     status: ret.status || "",
+                    item_price: ret.item_price || "",
                     dateCreated: new Date(ret.create_time * 1000).toLocaleDateString("pt-BR"),
                 }));
 
@@ -53,30 +54,21 @@ function Return() {
                 alert("Nenhum dado encontrado");
             }
         } catch (error) {
-            console.error("Erro ao buscar devoluções:", error);
             alert("Erro ao buscar devoluçõesaaaa");
         } finally { setLoading(false); }
     }
-
-    
-
 
     // lista filtrada pelo nome
     const filteredReturns = returns.filter((ret) =>
         ret.buyerName.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-
-   
     return (
         <>
         <Header/>
             <div style={{ padding: "20px", fontFamily: "Arial" }}>
 
-                <button
-                    onClick={GetReturn}
-                  
-                >
+                <button onClick={GetReturn}>
                     {loading ? "Carregando..." : "Buscar Devoluções"}
                 </button>
 
@@ -88,29 +80,13 @@ function Return() {
                         onChange={(e) => setSearchTerm(e.target.value)}
                         
                     />
-                    <input
-                        type="text"
-                        placeholder="qunatos dias"
-                        value={day}
-                        onChange={(e) => setDays(e.target.value)}
-                    
-                    />
                 </div>
 
                 {filteredReturns.length > 0 ? (
-                    <table
-                        style={{
-                            width: "100%",
-                            borderCollapse: "collapse",
-                            textAlign: "left",
-                            fontSize: "14px",
-                        }}
-                    >
+                    <table>
                             {filteredReturns.map((ret, index) => (
                                <ReturnCard  key={index} datas={ret} />
                             ))}
-                            
-                        
                     </table>
                 ) : (
                     !loading && <p>Nenhuma devolução encontrada.</p>
