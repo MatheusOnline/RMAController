@@ -58,31 +58,16 @@ function Return() {
         } finally { setLoading(false); }
     }
 
-     const test = [
-  {
-    portrait: "http://mms.img.susercontent.com/br-11134233-7r98o-m83jwszjfboxc8",
-    buyerName: "elizgranetto",
-    id_order: "251017BUP2PEHK",
-    id_request: "2510310GD39JGUB",
-    productImg: "http://mms.img.susercontent.com/br-11134207-7r98o-m5vhvcljjts5f7",
-    productDescript: "Cama pet confortável estofada elegante - PROMOÇÃO IMPERDIVEL",
-    reason: "ITEM_MISSING",
-    status: "ACCEPTED",
-    dateCreated: "20/10/25",
-  }
-];
+    
 
 
     // lista filtrada pelo nome
-    const filteredReturns = test.filter((ret) =>
+    const filteredReturns = returns.filter((ret) =>
         ret.buyerName.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
 
    
-
-
-
     return (
         <>
         <Header/>
@@ -121,23 +106,11 @@ function Return() {
                             fontSize: "14px",
                         }}
                     >
-                        <thead>
-                            <tr style={{ backgroundColor: "#f2f2f2" }}>
-                               
-                                
-                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Produto(s)</th>
-                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Motivo de Devolução</th>
-                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Status da solicitação</th>
-                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Valor (R$)</th>
-                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Valor (R$)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
                             {filteredReturns.map((ret, index) => (
                                <ReturnCard  key={index} datas={ret} />
                             ))}
                             
-                        </tbody>
+                        
                     </table>
                 ) : (
                     !loading && <p>Nenhuma devolução encontrada.</p>

@@ -1,6 +1,15 @@
-import { HeaderCard, ProfileImg, Card } from "./style";
-
-
+import { 
+  HeaderCard, 
+  ProfileImg, 
+  CardContainer, 
+  CardContent, 
+  ProductSection, 
+  ProductImg, 
+  InfoSection, 
+  Label, 
+  Value, 
+  ActionLink 
+} from "./style";
 
 interface ReturnData {
   portrait: string;
@@ -12,6 +21,7 @@ interface ReturnData {
   reason: string;
   status: string;
   dateCreated: string;
+  item_price: string;
 }
 
 interface Props {
@@ -20,22 +30,44 @@ interface Props {
 
 function ReturnCard({ datas }: Props) {
   return (
-    <Card>
-        <HeaderCard style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <ProfileImg src={datas.portrait} alt="Imagem de perfil" />
-          <p>{datas.buyerName}</p>
-          <p>|</p>
-          <p>{datas.id_order}</p>
-          <p>{datas.id_request}</p>
-        </HeaderCard>
-        <td>
-            <img src={datas.productImg} alt="Produto" style={{ width: 60, height: 60, objectFit: "cover" }} />
-        </td>
-        <td>{datas.productDescript}</td>
-        <td>{datas.reason}</td>
-        <td>{datas.status}</td>
-        <td>{datas.dateCreated}</td>
-    </Card>
+    <CardContainer>
+      <HeaderCard>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <ProfileImg src={datas.portrait} />
+          <p><strong>{datas.buyerName}</strong></p>
+          <p style={{ color: "#aaa" }}>|</p>
+          <p>ID Pedido: {datas.id_order}</p>
+          <p style={{ color: "#aaa" }}>|</p>
+          <p>ID Solicitação: {datas.id_request}</p>
+        </div>
+      </HeaderCard>
+
+      <CardContent>
+        <ProductSection>
+          <ProductImg src={datas.productImg} alt="Produto" />
+          <div>
+            <p><strong>{datas.productDescript}</strong></p>
+            <p style={{ color: "#666", fontSize: "13px" }}>{datas.reason}</p>
+          </div>
+        </ProductSection>
+
+        <InfoSection>
+          <div>
+            <Label>Status:</Label>
+            <Value>{datas.status}</Value>
+          </div>
+          <div>
+            <Label>Valor:</Label>
+            <Value>{datas.item_price}</Value>
+          </div>
+          <div>
+            <Label>Data:</Label>
+            <Value>{datas.dateCreated}</Value>
+          </div>
+          <ActionLink href="#">Ver detalhes</ActionLink>
+        </InfoSection>
+      </CardContent>
+    </CardContainer>
   );
 }
 
