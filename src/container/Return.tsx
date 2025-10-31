@@ -35,7 +35,19 @@ function Return() {
 
             console.log("Resposta da Shopee:", JSON.stringify(data, null, 2));
             if (data && data.return_list) {
-                setReturns(data.return_list);
+                const formatted = data.return_list.map((ret: any) => ({
+                    portrait: ret.user?.portrait || "",
+                    buyerName: ret.user?.username || "Desconhecido",
+                    id_order: ret.order_sn || "",
+                    id_request: ret.return_sn || "",
+                    productImg: ret.item?.[0]?.images?.[0] || "",
+                    productDescript: ret.item?.[0]?.name || "",
+                    reason: ret.reason || ret.text_reason || "",
+                    status: ret.status || "",
+                    dateCreated: new Date(ret.create_time * 1000).toLocaleDateString("pt-BR"),
+                }));
+
+                setReturns(formatted);
             }
             else {
                 alert("Nenhum dado encontrado");
@@ -48,7 +60,7 @@ function Return() {
 
     // lista filtrada pelo nome
     const filteredReturns = returns.filter((ret) =>
-        ret.user?.username?.toLowerCase().includes(searchTerm.toLowerCase())
+        ret.buyerName.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
@@ -58,15 +70,7 @@ function Return() {
 
                 <button
                     onClick={GetReturn}
-                    style={{
-                        backgroundColor: "#007bff",
-                        color: "white",
-                        border: "none",
-                        padding: "10px 20px",
-                        borderRadius: "6px",
-                        cursor: "pointer",
-                        marginBottom: "20px",
-                    }}
+                  
                 >
                     {loading ? "Carregando..." : "Buscar Devoluções"}
                 </button>
@@ -77,14 +81,14 @@ function Return() {
                         placeholder="Buscar pelo nome"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        style={{ padding: "8px", width: "300px", borderRadius: "4px", border: "1px solid #ccc" }}
+                        
                     />
                     <input
                         type="text"
                         placeholder="qunatos dias"
                         value={day}
                         onChange={(e) => setDays(e.target.value)}
-                        style={{ padding: "8px", width: "300px", borderRadius: "4px", border: "1px solid #ccc" }}
+                    
                     />
                 </div>
 
@@ -99,16 +103,13 @@ function Return() {
                     >
                         <thead>
                             <tr style={{ backgroundColor: "#f2f2f2" }}>
-                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>ID</th>
-                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Usuário</th>
-                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Pedido</th>
-                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Devolução</th>
-                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Status</th>
-                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Motivo</th>
+                               
+                                
+                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Produto(s)</th>
+                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Motivo de Devolução</th>
+                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Status da solicitação</th>
                                 <th style={{ padding: "8px", border: "1px solid #ddd" }}>Valor (R$)</th>
-                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Produto</th>
-                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Rastreio</th>
-                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Data criada'</th>
+                                <th style={{ padding: "8px", border: "1px solid #ddd" }}>Valor (R$)</th>
                             </tr>
                         </thead>
                         <tbody>
