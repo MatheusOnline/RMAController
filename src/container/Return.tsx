@@ -33,25 +33,9 @@ function Return() {
                 });
             const data = await res.json();
 
+            console.log("Resposta da Shopee:", JSON.stringify(data, null, 2));
             if (data && data.return_list) {
-                const mappedReturns = data.return_list.map((ret: any) => {
-                    const item = ret.item?.[0];
-                    return {
-                    portrait: ret.user?.portrait || "",
-                    buyerName: ret.user?.username || "Sem nome",
-                    id_order: ret.order_sn || "-",
-                    id_request: ret.return_sn || "-",
-                    productImg: item?.images?.[0] || ret.image?.[0] || "",
-                    productDescript: item?.name || "Sem descrição",
-                    reason: ret.reason || "Sem motivo",
-                    status: ret.status || "Desconhecido",
-                    dateCreated: new Date(ret.create_time * 1000).toLocaleString("pt-BR", {
-                        timeZone: "America/Sao_Paulo",
-                    }),
-                    };
-                });
-
-                setReturns(mappedReturns);
+                setReturns(data.return_list);
             }
             else {
                 alert("Nenhum dado encontrado");
