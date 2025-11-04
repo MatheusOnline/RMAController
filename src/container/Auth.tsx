@@ -23,7 +23,7 @@ const ShopeeAuth: React.FC = () => {
   // Pega token
   const getTokenShopLevel = async () => {
     try {
-      const res = await fetch("https://rmabackend-zuvt.onrender.com/generateToken", {
+      const res = await fetch("https://rmabackend-zuvt.onrender.com/token/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code, shop_id: shopId })
