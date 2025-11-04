@@ -3,7 +3,7 @@ import { GlobalStyle } from '../styles/GlobalStyle.tsx';
 
 //components
 import CardIndex from '../components/cardIndex.tsx'
-import ReturnTable from '../components/returnTable.tsx'
+
 import Header from '../components/header/header.tsx';
 //Services
 
