@@ -102,11 +102,11 @@ export const BuyerVideo = styled.div`
     height: 20%;
     display: flex;
     gap: 10px;
-    max-height: 50%;
-    min-height: 0%;
+
     box-sizing: border-box;
+    margin-top: 10px;
     img{
-        width: 20%;
+        width: 15%;
     }
 `
 
@@ -120,8 +120,9 @@ export const FlexLine = styled.div`
 
 export const CardProduct = styled.div`
     display: flex;
-    
-`
+    border-bottom: 2px solid #f3f3f3;
+    margin-bottom: 5px;
+    `
 
 export const ProductImg = styled.img`
     width: 15%;
@@ -165,7 +166,7 @@ export const ButtonSegundary = styled.button`
     color: #125f8b;
 
     &:hover{
-        background-color: #134c6d;
+        background-color: #125f8b2d;
         cursor: pointer;
     }
 `
