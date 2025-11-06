@@ -6,7 +6,7 @@ import { Page, ContainerDivision, ContainerDetails, ReturnHisto, CardDetail, Hea
        ButtonPrimary, ButtonSegundary, ContainerButtons, Modal, Topic, BuyerVideo } from "./style";
 import { GlobalStyle } from "../../styles/GlobalStyle";
 import Header from "../../components/header/header";
-import { error } from "console";
+
 function DetailPage(){
     const [searchParams] = useSearchParams();
     const return_sn = searchParams.get("id");
@@ -23,7 +23,7 @@ function DetailPage(){
                 });
             const data = await res.json();
             console.log(data)
-        }catch(erro){
+        }catch(error){
             alert(error)
         }
 
