@@ -58,7 +58,7 @@ const ShopeeAuth: React.FC = () => {
       const res = await fetch("https://rmabackend-zuvt.onrender.com/shop/datas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token, shop_id: shopId })
+        body: JSON.stringify({ shop_id: shopId })
       });
 
       const data = await res.json();

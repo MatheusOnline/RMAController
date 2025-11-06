@@ -14,7 +14,6 @@ function Return() {
     const [searchTerm, setSearchTerm] = useState("");
     const [status, setStatus] = useState("")
 
-    var storedToken:string;
     var storedShopId:string;
     //=========FUNCAO CHAMADA NA HORA QUE A PAGINA É CARREGADA======//
     useEffect(() => {
@@ -23,19 +22,18 @@ function Return() {
 
     //=========FUNCAO PARA CHAMAR A FUNÇAO DE DEVOLUÇOES======//
     function CallFunctionReturn(){
-        storedToken = localStorage.getItem("token") || "";
         storedShopId = localStorage.getItem("shop_id") || "";
 
 
-        if (storedToken && storedShopId) {
-            GetReturn(storedToken, storedShopId);
+        if ( storedShopId) {
+            GetReturn(storedShopId);
         }else{
             alert("Token ou Id da loja está faltando")
         }
     }
 
     //=========FUNCAO PARA BUSCAR AS DEVOLUÇOS NO BACKEND==========//
-    async function GetReturn(tokenParam: string, shopIdParam: string){
+    async function GetReturn( shopIdParam: string){
         try {
                 
             setLoading(true);
@@ -43,7 +41,7 @@ function Return() {
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ token:tokenParam, shop_id: shopIdParam }),
+                    body: JSON.stringify({ shop_id: shopIdParam }),
                 });
             const data = await res.json();
 
@@ -80,7 +78,8 @@ function Return() {
             CANCELLED: "Cancelado",
             PROCESSING: "Processamento",
             REQUESTED: "Solicitada",
-            COMPLETED: "Concluído"
+            COMPLETED: "Concluído",
+            JUDGING: "Julgamento"
         };
         return translations[status.toUpperCase()] || status
     }
