@@ -23,6 +23,7 @@ function DetailPage(){
                 });
             const data = await res.json();
             console.log(data)
+            console.log(return_sn)
         }catch(error){
             alert(error)
         }
