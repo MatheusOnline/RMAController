@@ -3,8 +3,13 @@ import Home from "./container/Home";
 import RegistrationLabel from "./container/registrationLabel"
 import ShopeeAuth from "./container/Auth";
 import Return from "./container/ReturnPage";
-
+import DetailPage from "./container/DetailPage";
 function Teste() {
+
+  
+
+
+
   return (
     <Router>
       <Routes>
@@ -14,6 +19,7 @@ function Teste() {
 
         <Route path="/auth" element={<ShopeeAuth/>}/>
         <Route path="/return" element={<Return/>}/>
+        <Route path="/return/detail?" element={<DetailPage/>}/>
       </Routes>
     </Router>
   );

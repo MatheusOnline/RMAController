@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
 
 export const CardContainer = styled.div`
   width: 100%;
@@ -67,7 +69,7 @@ export const Value = styled.span`
   color: #333;
 `;
 
-export const ActionLink = styled.a`
+export const ActionLink = styled(Link)`
   color: #ee4d2d;
   font-weight: bold;
   text-decoration: none;
