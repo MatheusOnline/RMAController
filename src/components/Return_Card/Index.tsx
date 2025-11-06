@@ -64,7 +64,7 @@ function ReturnCard({ datas }: Props) {
             <Label>Data:</Label>
             <Value>{datas.dateCreated}</Value>
           </div>
-          <ActionLink to={`/return/detail?id=${datas.id_order}`}>Ver detalhes</ActionLink>
+          <ActionLink to={`/return/detail?id=${datas.id_request}`}>Ver detalhes</ActionLink>
         </InfoSection>
       </CardContent>
     </CardContainer>
