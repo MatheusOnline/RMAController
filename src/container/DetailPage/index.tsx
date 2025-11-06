@@ -14,8 +14,8 @@ function DetailPage(){
 
     async function CallSeachReturn(){
         try{
-            const route = import.meta.env.ROUTE_BACKEND
-            const res = await fetch(`${route}/return/seach`,
+            
+            const res = await fetch(`https://rmabackend-zuvt.onrender.com/return/seach`,
                {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
