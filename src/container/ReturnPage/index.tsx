@@ -39,7 +39,7 @@ function Return() {
         try {
                 
             setLoading(true);
-            const res = await fetch("https://rmabackend-zuvt.onrender.com/get_return",
+            const res = await fetch("https://rmabackend-zuvt.onrender.com/return/get",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },

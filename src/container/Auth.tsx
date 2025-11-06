@@ -55,7 +55,7 @@ const ShopeeAuth: React.FC = () => {
   // Busca perfil
   const GetProfile = async () => {
     try {
-      const res = await fetch("https://rmabackend-zuvt.onrender.com/get_profile", {
+      const res = await fetch("https://rmabackend-zuvt.onrender.com/shop/datas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token, shop_id: shopId })
