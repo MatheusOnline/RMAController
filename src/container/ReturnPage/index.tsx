@@ -92,7 +92,7 @@ function Return() {
             }
     }
 
-      //=========FUNCAO PARA TRADUZIR O STATUS==========//
+    //=========FUNCAO PARA TRADUZIR O STATUS==========//
     function translateStatus(status:string){
         const translations: Record<string, string> = {
             ACCEPTED: "Aceito",

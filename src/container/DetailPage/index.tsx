@@ -4,13 +4,18 @@ import { useEffect } from "react";
 import { Page, ContainerDivision, ContainerDetails, ReturnHisto, CardDetail, HeaderProfile, BodyProfile,
        ImgPortrait, CardContent, Line, ContainerReason,CardProduct ,ProductImg, ProductContent, FlexLine,
        ButtonPrimary, ButtonSegundary, ContainerButtons, Modal, Topic, BuyerVideo } from "./style";
+       
 import { GlobalStyle } from "../../styles/GlobalStyle";
 import Header from "../../components/header/header";
+
+//##### FUNCOES UTILS #####//
+import translateStatus from "../../utils/translateStatus"; 
+import translateReason from "../../utils/translateReason";
 
 function DetailPage(){
     const [searchParams] = useSearchParams();
     const return_sn = searchParams.get("id");
-    const [datas, setDatas] = useState<ReturnData | null>(null);
+    const [datas, setDatas] = useState<FormattedData | null>(null);
 
 
     interface ReturnData {
@@ -40,9 +45,26 @@ function DetailPage(){
             _id: string;
         };
         _id: string;
-        }
+    }
 
+    interface ReturnItem {
+        name: string;
+        images: string[];
+        item_price: string;
+        amount: string;
+    }
 
+    interface FormattedData {
+        buyerName: string;
+        portrait: string;
+        id_order: string;
+        id_request: string;
+        reason: string;
+        status: string;
+        text_reason: string;
+        dateCreated: string;
+        items: ReturnItem[];
+    }
 
 
     async function CallSeachReturn(){
@@ -55,7 +77,27 @@ function DetailPage(){
                     body: JSON.stringify({return_sn}),
                 });
             const json: { data: ReturnData; succeso: boolean } = await res.json();
-            setDatas(json.data);        
+            const formatted = {
+                buyerName: json.data.user?.username || "Desconhecido",
+                portrait: json.data.user?.portrait || "https://www.transparentpng.com/download/user/gray-user-profile-icon-png-fP8Q1P.png",
+                id_order: json.data.order_sn || "",
+                id_request: json.data.return_sn || "",
+                reason: translateReason(json.data.reason) || "",
+                status: translateStatus(json.data.status) || "",
+                text_reason: json.data.text_reason || "",
+                dateCreated: String(new Date(Number(json.data.create_time) * 1000).toLocaleDateString("pt-BR")),
+                items: json.data.item.map((i: any) => ({
+                    name: i.name || "",
+                    images: i.images || "" ,
+                    item_price: i.item_price || "",
+                    amount: i.amount || ""
+                })),
+            }
+                
+        
+           setDatas(formatted);
+
+       
         }catch(error){
             alert(error)
         }
@@ -102,21 +144,21 @@ function DetailPage(){
                      {/*CONTAINER DOS DADOS DO COMPRADOR*/}
                     <CardDetail>
                         <HeaderProfile>
-                            <p>ID Pedido: {datas?.order_sn}</p>
+                            <p>ID Pedido: {datas?.id_order}</p>
                             <p>|</p>
-                            <p>ID Solicitação: {datas?.return_sn}</p>
+                            <p>ID Solicitação: {datas?.id_request}</p>
                         </HeaderProfile>
                         <Line />
                         <BodyProfile>
-                            <ImgPortrait src={datas?.user.portrait} alt="" />
-                            <p>{datas?.user.username}</p>
+                            <ImgPortrait src={datas?.portrait} alt="" />
+                            <p>{datas?.buyerName}</p>
                         </BodyProfile>
                     </CardDetail>
                     
                     {/*CONTAINER DOS DADOS DA DEVOLUÇAO*/}
                     <CardDetail>
                         <ContainerReason>
-                            <Topic>Status do rembolso: {datas?.status}</Topic>
+                            <Topic>Status do rembolso: { datas?.status}</Topic>
                             <CardContent>
                                 <p>
                                     A Shopee aprovou o reembolso de R$59,98 para o comprador. Caso não concorde, você pode abrir uma Disputa até 06-11-2025.
@@ -151,7 +193,7 @@ function DetailPage(){
                     <CardDetail>
                         <Topic>Items da devolução</Topic>
 
-                        {datas?.item.map((product, index) => (
+                        {datas?.items.map((product, index) => (
                         <CardProduct key={index}>
                             <ProductImg src={product.images[0]} alt={product.name} />
                             <ProductContent>
