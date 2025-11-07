@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { Page, ContainerDivision, ContainerDetails, ReturnHisto, CardDetail, HeaderProfile, BodyProfile,
        ImgPortrait, CardContent, Line, ContainerReason,CardProduct ,ProductImg, ProductContent, FlexLine,
-       ButtonPrimary, ButtonSegundary, ContainerButtons, Modal, Topic, BuyerVideo } from "./style";
+       ButtonPrimary, ButtonSegundary, ContainerButtons, Modal, Topic, BuyerVideo, BuyerVideos } from "./style";
        
 import { GlobalStyle } from "../../styles/GlobalStyle";
 import Header from "../../components/header/header";
@@ -19,7 +19,7 @@ function DetailPage(){
 
 
     interface ReturnData {
-        buyerVideos: {
+        buyer_videos: {
             thumbnail_url: string;
             video_url: string;
             _id: string;
@@ -99,7 +99,7 @@ function DetailPage(){
                     item_price: i.item_price || "",
                     amount: i.amount || ""
                 })),
-                buyervideos: (json.data.buyerVideos || []).map((i: any) => ({
+                buyervideos: (json.data.buyer_videos || []).map((i: any) => ({
                     thumbnail_url: i.thumbnail_url || "",
                     video_url: i.video_url || ""
                 }))
@@ -109,7 +109,7 @@ function DetailPage(){
         
            setDatas(formatted);
 
-       
+            console.log(formatted)
         }catch(error){
             alert(error)
         }
@@ -192,13 +192,19 @@ function DetailPage(){
                                 <p>{datas?.text_reason}</p>
                                 <BuyerVideo>
                                     {datas?.buyervideos.map((video, index) =>
-                                        <img
-                                            key={index}
-                                            src={video.thumbnail_url}
-                                            onClick={() => openModal(`${video.thumbnail_url}`)}
-                                            alt="miniatura"
-                                        />
-                                    
+                                        <BuyerVideos>
+                                            <img
+                                                key={index}
+                                                src={video.thumbnail_url}
+                                                onClick={() => openModal(`${video.thumbnail_url}`)}
+                                                alt="miniatura"
+                                            />
+                                            <video controls autoPlay onClick={(e) => e.stopPropagation()}>
+                                                <source src={video.video_url} type="video/mp4" />
+                                                Seu navegador não suporta vídeos.
+                                            </video>
+                                        </BuyerVideos> 
+
                                     
                                     )}
                                     

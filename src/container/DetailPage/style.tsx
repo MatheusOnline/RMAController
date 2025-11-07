@@ -105,9 +105,7 @@ export const BuyerVideo = styled.div`
 
     box-sizing: border-box;
     margin-top: 10px;
-    img{
-        width: 15%;
-    }
+    
 `
 
 export const FlexLine = styled.div`
@@ -188,4 +186,21 @@ export const Modal = styled.div`
         
     }
 `
-    
+
+export const BuyerVideos = styled.div`
+    width: 100%;
+    height: 20%;
+    display: flex;
+    gap: 10px;
+
+    box-sizing: border-box;
+    margin-top: 10px;
+
+    img{
+       width : 15% ;
+    }
+
+    video{
+        width: 15%;
+    }
+`
