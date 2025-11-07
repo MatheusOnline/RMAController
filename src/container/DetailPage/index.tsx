@@ -10,6 +10,39 @@ import Header from "../../components/header/header";
 function DetailPage(){
     const [searchParams] = useSearchParams();
     const return_sn = searchParams.get("id");
+    const [datas, setDatas] = useState<ReturnData | null>(null);
+
+
+    interface ReturnData {
+        buyerVideos: {
+            thumbnail_url: string;
+            video_url: string;
+            _id: string;
+        };
+        create_time: string;
+        item: {
+            images: string[];
+            item_id: string;
+            item_price: string;
+            amount: string;
+            name: string;
+        }[];
+        order_sn: string;
+        reason: string;
+        return_sn: string;
+        shop_id: string;
+        status: string;
+        text_reason: string;
+        tracking_number: string;
+        user: {
+            portrait: string;
+            username: string;
+            _id: string;
+        };
+        _id: string;
+        }
+
+
 
 
     async function CallSeachReturn(){
@@ -21,9 +54,8 @@ function DetailPage(){
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({return_sn}),
                 });
-            const data = await res.json();
-            console.log(data)
-            console.log(return_sn)
+            const json: { data: ReturnData; succeso: boolean } = await res.json();
+            setDatas(json.data);        
         }catch(error){
             alert(error)
         }
@@ -90,21 +122,21 @@ function DetailPage(){
                      {/*CONTAINER DOS DADOS DO COMPRADOR*/}
                     <CardDetail>
                         <HeaderProfile>
-                            <p>ID Pedido: {test[0].id_order}</p>
+                            <p>ID Pedido: {datas?.order_sn}</p>
                             <p>|</p>
-                            <p>ID Solicitação: {test[0].id_request}</p>
+                            <p>ID Solicitação: {datas?.return_sn}</p>
                         </HeaderProfile>
                         <Line />
                         <BodyProfile>
-                            <ImgPortrait src={test[0].portrait} alt="" />
-                            <p>{test[0].buyerName}</p>
+                            <ImgPortrait src={datas?.user.portrait} alt="" />
+                            <p>{datas?.user.username}</p>
                         </BodyProfile>
                     </CardDetail>
                     
                     {/*CONTAINER DOS DADOS DA DEVOLUÇAO*/}
                     <CardDetail>
                         <ContainerReason>
-                            <Topic>Status do rembolso: {test[0].status}</Topic>
+                            <Topic>Status do rembolso: {datas?.status}</Topic>
                             <CardContent>
                                 <p>
                                     A Shopee aprovou o reembolso de R$59,98 para o comprador. Caso não concorde, você pode abrir uma Disputa até 06-11-2025.
@@ -121,16 +153,10 @@ function DetailPage(){
                      {/*CONTAINER DO MOTIVO DA DEVOLUÇAO*/}
                     <CardDetail>
                         <ContainerReason>
-                            
-                            <Topic>Motivo do comprador: {test[0].reason}</Topic>
+                            <Topic>Motivo do comprador: {datas?.reason}</Topic>
                             <CardContent>
-                                <p>{test[0].text_reason}</p>
+                                <p>{datas?.text_reason}</p>
                                 <BuyerVideo>
-                                   <img
-                                        src={test[0].buyerVideos.thumbnail_url}
-                                        onClick={() => openModal(test[0].buyerVideos.thumbnail_url)}
-                                        alt="miniatura"
-                                    />
                                     <img
                                         src="https://placehold.co/200"
                                         onClick={() => openModal("https://placehold.co/200")}
@@ -138,42 +164,27 @@ function DetailPage(){
                                     />
                                 </BuyerVideo>
                             </CardContent>
-                        </ContainerReason>
-
-                        <ContainerReason>
-
-                        </ContainerReason>
+                        </ContainerReason>                        
                     </CardDetail>
 
                     {/*CONTAINER DOS PRODUTOS DA DEVOLUÇAO */}
                     <CardDetail>
                         <Topic>Items da devolução</Topic>
 
-                        <CardProduct>
-                            <ProductImg src={test[0].productImg} alt="" />
+                        {datas?.item.map((product, index) => (
+                        <CardProduct key={index}>
+                            <ProductImg src={product.images[0]} alt={product.name} />
                             <ProductContent>
                                 <FlexLine>
-                                    <p>{test[0].productDescript}</p>
-                                    <p>R${test[0].item_price}</p> 
+                                    <p>{product.name}</p>
+                                    <p>R${product.item_price}</p>
                                 </FlexLine>
                                 <div>
-                                    <p>Quantidade: {test[0].amount}</p>
+                                    <p>Quantidade: {product.amount}</p>
                                 </div>
-                            </ProductContent>
+                        </ProductContent>
                         </CardProduct>
-
-                        <CardProduct>
-                            <ProductImg src={test[0].productImg} alt="" />
-                            <ProductContent>
-                                <FlexLine>
-                                    <p>{test[0].productDescript}</p>
-                                    <p>R${test[0].item_price}</p> 
-                                </FlexLine>
-                                <div>
-                                    <p>Quantidade: {test[0].amount}</p>
-                                </div>
-                            </ProductContent>
-                        </CardProduct>
+                        ))}
                     </CardDetail>
 
                 </ContainerDetails>
