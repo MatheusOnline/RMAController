@@ -23,7 +23,7 @@ function DetailPage(){
             thumbnail_url: string;
             video_url: string;
             _id: string;
-        };
+        }[];
         create_time: string;
         item: {
             images: string[];
@@ -54,6 +54,11 @@ function DetailPage(){
         amount: string;
     }
 
+    interface BuyerVideo {
+        thumbnail_url: string;
+        video_url: string;
+    }
+
     interface FormattedData {
         buyerName: string;
         portrait: string;
@@ -64,7 +69,9 @@ function DetailPage(){
         text_reason: string;
         dateCreated: string;
         items: ReturnItem[];
+        buyervideos: BuyerVideo[];
     }
+    
 
 
     async function CallSeachReturn(){
@@ -92,6 +99,12 @@ function DetailPage(){
                     item_price: i.item_price || "",
                     amount: i.amount || ""
                 })),
+                buyervideos: json.data.buyerVideos.map((i: any) => ({
+                    thumbnail_url: i.thumbnail_url || "",
+                    video_url: i.video_url || ""
+
+                }))
+
             }
                 
         
@@ -179,11 +192,17 @@ function DetailPage(){
                             <CardContent>
                                 <p>{datas?.text_reason}</p>
                                 <BuyerVideo>
-                                    <img
-                                        src="https://placehold.co/200"
-                                        onClick={() => openModal("https://placehold.co/200")}
-                                        alt="miniatura"
-                                    />
+                                    {datas?.buyervideos.map((video, index) =>
+                                        <img
+                                            key={index}
+                                            src={video.thumbnail_url}
+                                            onClick={() => openModal(`${video.thumbnail_url}`)}
+                                            alt="miniatura"
+                                        />
+                                    
+                                    
+                                    )}
+                                    
                                 </BuyerVideo>
                             </CardContent>
                         </ContainerReason>                        
