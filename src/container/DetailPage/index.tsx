@@ -99,10 +99,9 @@ function DetailPage(){
                     item_price: i.item_price || "",
                     amount: i.amount || ""
                 })),
-                buyervideos: json.data.buyerVideos.map((i: any) => ({
+                buyervideos: (json.data.buyerVideos || []).map((i: any) => ({
                     thumbnail_url: i.thumbnail_url || "",
                     video_url: i.video_url || ""
-
                 }))
 
             }
