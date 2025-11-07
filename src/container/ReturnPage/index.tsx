@@ -15,11 +15,17 @@ function Return() {
     const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [status, setStatus] = useState("")
+    const  cached = sessionStorage.getItem("returns")
 
     var storedShopId:string;
     //=========FUNCAO CHAMADA NA HORA QUE A PAGINA É CARREGADA======//
     useEffect(() => {
-       CallFunctionReturn()
+        if (cached) {
+            setReturns(JSON.parse(cached));
+        }else
+        {
+            CallFunctionReturn()
+        }
     }, []);
 
     //=========FUNCAO PARA CHAMAR A FUNÇAO DE DEVOLUÇOES======//
@@ -63,6 +69,7 @@ function Return() {
                 }));
 
             setReturns(formatted);
+            sessionStorage.setItem("returns", JSON.stringify(formatted));
             } else{
                 alert("Nenhum dado encontrado");
             }
