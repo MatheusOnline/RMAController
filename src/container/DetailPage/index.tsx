@@ -66,26 +66,6 @@ function DetailPage(){
        CallSeachReturn()
     }, []);
 
-    const test = [
-    {
-        portrait: "http://mms.img.susercontent.com/br-11134233-7r98o-m83jwszjfboxc8",
-        buyerName: "elizgranetto",
-        id_order: "251017BUP2PEHK",
-        id_request: "2510310GD39JGUB",
-        productImg: "http://mms.img.susercontent.com/br-11134207-7r98o-m5vhvcljjts5f7",
-        productDescript: "Cama pet confortável estofada elegante - PROMOÇÃO IMPERDIVEL",
-        reason: "ITEM_MISSING",
-        text_reason: "Descrição consta KIT COM *2* POLTRONAS, quando recebi o pacote só havia 1 dentro. Sendo que, paguei o valor das 2",
-        status: "ACCEPTED",
-        item_price: "36,50",
-        amount: "2",
-        dateCreated: "20/10/25",
-        buyerVideos: {
-            thumbnail_url: "https://cf.shopee.com.br/file/br-11134004-81z1k-mgec5b3go0ec67",
-            video_url: "",
-        },
-
-    }];
     
     const [modalOpen, setModalOpen] = useState(false);
     const [imgSrc, setImgSrc] = useState<string>("");
