@@ -15,17 +15,27 @@ function Return() {
     const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [status, setStatus] = useState("")
-    const  cached = sessionStorage.getItem("returns")
+    
 
     var storedShopId:string;
     //=========FUNCAO CHAMADA NA HORA QUE A PAGINA É CARREGADA======//
     useEffect(() => {
-        if (cached) {
-            setReturns(JSON.parse(cached));
-        }else
-        {
-            CallFunctionReturn()
+        const storedShopId = localStorage.getItem("shop_id");
+        if (!storedShopId) {
+            alert("Token ou ID da loja está faltando");
+            return;
         }
+
+        const cached = sessionStorage.getItem("returns");
+
+        if (cached) {
+            console.log("✅ Usando cache de devoluções");
+            setReturns(JSON.parse(cached));
+        } else {
+            console.log("📡 Buscando devoluções no servidor...");
+            GetReturn(storedShopId);
+        }
+        
     }, []);
 
     //=========FUNCAO PARA CHAMAR A FUNÇAO DE DEVOLUÇOES======//
@@ -45,6 +55,8 @@ function Return() {
         try {
                 
             setLoading(true);
+
+
             const res = await fetch("https://rmabackend-zuvt.onrender.com/return/get",
                 {
                     method: "POST",
