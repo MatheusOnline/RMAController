@@ -106,18 +106,32 @@ function DetailPage(){
 
             }
                 
-        
-           setDatas(formatted);
-
-            console.log(formatted)
+            setDatas(formatted);
         }catch(error){
             alert(error)
         }
 
     }
 
+    async function CallTracking() {
+        try{
+            const shopIdParam = localStorage.getItem("shop_id") || "";
+            const res = await fetch(`https://rmabackend-zuvt.onrender.com/return/tracking`,{
+                method: "POST",
+                headers: {"Content-Type": "application/json" },
+                body: JSON.stringify({return_sn, shop_id: shopIdParam})
+            })
+
+            console.log(res)
+        }catch(error){
+            alert(error)
+        }
+    }
+
+
      useEffect(() => {
-       CallSeachReturn()
+        CallTracking()
+        CallSeachReturn()
     }, []);
 
     
@@ -187,7 +201,7 @@ function DetailPage(){
                      {/*CONTAINER DO MOTIVO DA DEVOLUÇAO*/}
                     <CardDetail>
                         <ContainerReason>
-                            <Topic>Motivo do comprador: {datas?.reason}</Topic>
+                            <Topic>Motivo do Comprador: {datas?.reason}</Topic>
                             <CardContent>
                                 <p>{datas?.text_reason}</p>
                                 <BuyerVideo>
@@ -215,7 +229,7 @@ function DetailPage(){
 
                     {/*CONTAINER DOS PRODUTOS DA DEVOLUÇAO */}
                     <CardDetail>
-                        <Topic>Items da devolução</Topic>
+                        <Topic>Items da Devolução</Topic>
 
                         {datas?.items.map((product, index) => (
                         <CardProduct key={index}>
