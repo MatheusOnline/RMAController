@@ -6,7 +6,7 @@ import {Page, FunctionBar, ButtonRefresh, RefreshIcon, ContainerInput, InputSeac
 //=======COMPONENTES========//
 import Header from "../../components/header/header";
 import ReturnCard from "../../components/Return_Card/Index";
-import LoadScreen from "../../components/LoadScreen";
+import LoadScreen from "../../components/Load";
 function Return() {
     const [returns, setReturns] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);

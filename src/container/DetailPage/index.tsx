@@ -7,7 +7,7 @@ import { Page, ContainerDivision, ContainerDetails, ReturnHisto, CardDetail, Hea
        
 import { GlobalStyle } from "../../styles/GlobalStyle";
 import Header from "../../components/header/header";
-import LoadScreen from "../../components/LoadScreen";
+import LoadScreen from "../../components/Load";
 
 //##### FUNCOES UTILS #####//
 import translateStatus from "../../utils/translateStatus"; 

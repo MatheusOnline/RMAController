@@ -35,4 +35,4 @@ function Load(){
     )
 }
 
-export default LoadScreen;
+export default Load;
