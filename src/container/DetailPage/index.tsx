@@ -128,7 +128,7 @@ function DetailPage(){
 
             const response = await res.json();
             console.log(response.datas)
-            setTrackingDatas(response.response.tracking_info);
+            setTrackingDatas(response.datas.response.tracking_info);
         }catch(error){
             alert(error)
         }
