@@ -71,8 +71,6 @@ function DetailPage(){
         items: ReturnItem[];
         buyervideos: BuyerVideo[];
     }
-    
-
 
     async function CallSeachReturn(){
         try{
@@ -122,7 +120,8 @@ function DetailPage(){
                 body: JSON.stringify({return_sn, shop_id: shopIdParam})
             })
 
-            console.log(res)
+            const response = await res.json();
+            console.log(response.datas)
         }catch(error){
             alert(error)
         }
