@@ -25,6 +25,7 @@ export const ReturnHisto = styled.div`
     width: 30%;
     height: 100%;
     
+    
 `
 
 export const ContainerDetails = styled.div`
@@ -203,4 +204,31 @@ export const BuyerVideos = styled.div`
     video{
         width: 15%;
     }
+`
+
+export const ContainerTracking = styled.div`
+    display: flex;
+    
+    flex-direction: column;
+    
+    & h4{
+        color: #5a5a5a ;
+    }
+
+    & p{
+        color: #5a5a5a;
+    }
+`
+
+export const ContainerLine = styled.div`
+    display: flex;
+    width: 20%;
+    align-items: center;
+    justify-content: center;
+`
+
+export const UpLine = styled.div`
+    width: 2px;
+    height:20px;
+    background-color: #5a5a5a;
 `

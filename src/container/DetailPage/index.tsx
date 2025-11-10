@@ -3,10 +3,11 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { Page, ContainerDivision, ContainerDetails, ReturnHisto, CardDetail, HeaderProfile, BodyProfile,
        ImgPortrait, CardContent, Line, ContainerReason,CardProduct ,ProductImg, ProductContent, FlexLine,
-       ButtonPrimary, ButtonSegundary, ContainerButtons, Modal, Topic, BuyerVideo, BuyerVideos } from "./style";
+       ButtonPrimary, ButtonSegundary, ContainerButtons, Modal, Topic, BuyerVideo, BuyerVideos, UpLine, ContainerTracking,ContainerLine } from "./style";
        
 import { GlobalStyle } from "../../styles/GlobalStyle";
 import Header from "../../components/header/header";
+import LoadScreen from "../../components/LoadScreen";
 
 //##### FUNCOES UTILS #####//
 import translateStatus from "../../utils/translateStatus"; 
@@ -17,7 +18,9 @@ function DetailPage(){
     const return_sn = searchParams.get("id");
     const [datas, setDatas] = useState<FormattedData | null>(null);
     const [trackingDatas, setTrackingDatas] = useState<TrackingInfo[]>([]);
-
+    const [modalOpen, setModalOpen] = useState(false);
+    const [imgSrc, setImgSrc] = useState<string>("");
+    const [loading, setLoading] = useState(true)
 
     interface TrackingInfo {
         update_time: number;
@@ -131,6 +134,8 @@ function DetailPage(){
             setTrackingDatas(response.datas.response.tracking_info);
         }catch(error){
             alert(error)
+        }finally{ 
+            setLoading(false); 
         }
     }
 
@@ -141,8 +146,7 @@ function DetailPage(){
     }, []);
 
     
-    const [modalOpen, setModalOpen] = useState(false);
-    const [imgSrc, setImgSrc] = useState<string>("");
+
 
     const openModal = (src: string) => {
         setImgSrc(src);
@@ -171,6 +175,17 @@ function DetailPage(){
                 </Modal>
             )}
 
+            {loading ? 
+            (
+                <LoadScreen/>
+                    
+            ) 
+            : 
+            (
+            
+                
+
+    
             <ContainerDivision>
                 <ContainerDetails>
                      {/*CONTAINER DOS DADOS DO COMPRADOR*/}
@@ -256,21 +271,27 @@ function DetailPage(){
                 </ContainerDetails>
                 
                 
-
+                
                 <ReturnHisto>
+                    <CardDetail>
+                        <Topic>Historico de transporte</Topic>
+                        <Line></Line>
                     {trackingDatas && trackingDatas.map((item, index) => (
-                        <div key={index}>
+                        <ContainerTracking key={index}>
                         <h4>{item.tracking_description}</h4>
                         <p>{new Date(item.update_time * 1000).toLocaleDateString("pt-BR")}</p>
 
                         {/* Linha entre os itens, exceto no último */}
-                        {index < trackingDatas.length - 1 && <hr />}
-                        </div>
+                        {index < trackingDatas.length - 1 && <ContainerLine><UpLine/> </ContainerLine>}
+                        </ContainerTracking>
                     ))}
+                    </CardDetail>
                 </ReturnHisto>
             </ContainerDivision>
-        </Page>
 
+            )}
+        </Page>
+        
     )
 }
 

@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
 
 //=========Styles========//
-import {Page, FunctionBar, ButtonRefresh, RefreshIcon, ContainerInput, InputSeach, SeachIcon, ContainerNotreturn, WapperNoReturn, TextNoReturn, TableReturn, ContainerPage, LoadScreen, Spinner, SelectStatus,ContainerSelect } from "./style";
+import {Page, FunctionBar, ButtonRefresh, RefreshIcon, ContainerInput, InputSeach, SeachIcon, ContainerNotreturn, WapperNoReturn, TextNoReturn, TableReturn, ContainerPage, SelectStatus,ContainerSelect } from "./style";
 
 //=======COMPONENTES========//
 import Header from "../../components/header/header";
 import ReturnCard from "../../components/Return_Card/Index";
-
+import LoadScreen from "../../components/LoadScreen";
 function Return() {
-    
-    
-
     const [returns, setReturns] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
@@ -145,9 +142,8 @@ function Return() {
             <Header/>
             {loading ? 
             (
-                <LoadScreen>
-                    <Spinner></Spinner>
-                </LoadScreen>
+                <LoadScreen/>
+                    
             ) 
             : 
             (
