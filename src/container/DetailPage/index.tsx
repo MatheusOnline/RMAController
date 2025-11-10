@@ -16,7 +16,13 @@ function DetailPage(){
     const [searchParams] = useSearchParams();
     const return_sn = searchParams.get("id");
     const [datas, setDatas] = useState<FormattedData | null>(null);
+    const [trackingDatas, setTrackingDatas] = useState<TrackingInfo[]>([]);
 
+
+    interface TrackingInfo {
+        update_time: number;
+        tracking_description: string;
+    }
 
     interface ReturnData {
         buyer_videos: {
@@ -122,6 +128,7 @@ function DetailPage(){
 
             const response = await res.json();
             console.log(response.datas)
+            setTrackingDatas(response.response.tracking_info);
         }catch(error){
             alert(error)
         }
@@ -251,7 +258,15 @@ function DetailPage(){
                 
 
                 <ReturnHisto>
+                    {trackingDatas && trackingDatas.map((item, index) => (
+                        <div key={index}>
+                        <h4>{item.tracking_description}</h4>
+                        <p>{new Date(item.update_time * 1000).toLocaleDateString("pt-BR")}</p>
 
+                        {/* Linha entre os itens, exceto no último */}
+                        {index < trackingDatas.length - 1 && <hr />}
+                        </div>
+                    ))}
                 </ReturnHisto>
             </ContainerDivision>
         </Page>
