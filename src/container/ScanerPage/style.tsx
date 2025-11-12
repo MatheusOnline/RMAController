@@ -14,7 +14,7 @@ export const ContainerScan = styled.div`
 
 export const ButtonExit = styled.button`
   width: 90%;
-  height: 40px;
+  height: 10%;
   background-color: #125f8b;
   border: none;
   margin-top: 100%;
