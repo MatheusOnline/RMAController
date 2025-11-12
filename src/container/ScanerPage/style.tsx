@@ -17,7 +17,7 @@ export const ButtonExit = styled.button`
   height: 10%;
   background-color: #125f8b;
   border: none;
-  margin-top: 100%;
+  margin-top: 80%;
   color: aliceblue;
 
 `
