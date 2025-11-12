@@ -11,7 +11,7 @@ export const Page = styled.main`
   padding: 16px;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
-  overflow-y: hidden;
+
 `;
 
 export const ContainerScan = styled.div`
