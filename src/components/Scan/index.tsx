@@ -36,7 +36,7 @@ function Scan ({ onResult }: ScanProps) {
     <div style={{width: "100%" , maxHeight: "50%"}}>
       <video
         ref={videoRef}
-        style={{ width: "100%", borderRadius: "8px" }}
+        style={{ width: "100%", maxHeight: "80%", borderRadius: "8px" }}
       />
     </div>
   );
