@@ -50,7 +50,7 @@ export const ContainerContent = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 14px;
-  padding-bottom: 80px;
+  
 `;
 
 export const Wrapper = styled.div`
@@ -70,8 +70,7 @@ export const Wrapper = styled.div`
 
 export const ConfimButton = styled.button`
   width: 90%;
-  max-width: 350px;
-  height: 52px;
+  height: 100px;
   border-radius: 10px;
   background-color: #125f8b;
   border: none;
@@ -79,7 +78,7 @@ export const ConfimButton = styled.button`
   font-weight: 600;
   color: #f4f4f4;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  margin-top: 16px;
+  
   transition: 0.3s ease;
 
   &:active {
