@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Page, ContainerScan, ButtonExit, ContainerContent,Wrapper,ConfimButton,ContainerReason, TextArea, ContainerObservation } from "./style"
+import { Page, ContainerScan, ButtonExit, ContainerContent,Wrapper,ConfimButton,ContainerReason, TextArea, ContainerObservation,ContainerItem, ItemDatas, CotainerDatasw,ImgItem } from "./style"
 
 
 //####COMPONENTES####
@@ -41,9 +41,23 @@ function ScanerPage(){
           <Wrapper>
             <ContainerObservation>
               <h4>Observaçao</h4>
-              <TextArea name="" id=""></TextArea>
+              <TextArea name="" id="" placeholder="Adicione uma observaçao "></TextArea>
             </ContainerObservation>
           </Wrapper>
+
+          <Wrapper>
+            <ContainerItem>
+              <ImgItem src="https://placehold.co/200x200" alt="" />
+              <CotainerDatasw>
+                <ItemDatas>
+                  <p>Poltronana nina </p>
+                  <p>R$45,90</p>
+                </ItemDatas>
+                <p>Qunatidade: 2</p>
+              </CotainerDatasw>
+            </ContainerItem>
+          </Wrapper>
+
           <ImageUploader onImageSelect={handleImage} />
           <ConfimButton>Confirmar Envio</ConfimButton>
         </ContainerContent>
