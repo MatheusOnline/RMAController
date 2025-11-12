@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Page = styled.main`
   width: 100%;
-  
+  height: 100%;
   background-color: #f2f6f9;
   display: flex;
   flex-direction: column;
