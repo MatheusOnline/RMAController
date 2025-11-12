@@ -14,12 +14,17 @@ export const ContainerScan = styled.div`
 
 export const ButtonExit = styled.button`
   width: 90%;
-  height: 10%;
+  height: 20%;
   background-color: #125f8b;
   border: none;
   margin-top: 80%;
   color: aliceblue;
 
+  transition: 0.3s ease;
+  &:hover{
+    cursor: pointer;
+    background: #125f8bca;
+  }
 `
 
 export const ContainerContent = styled.div`
