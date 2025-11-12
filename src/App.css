@@ -14,3 +14,6 @@ html, body{
   background-color: rgb(228, 228, 228);
 }
 
+#root{
+  height: 100%;
+}
