@@ -41,7 +41,7 @@ function ImageUploader({ onImageSelect }: ImageUploaderProps) {
             src={preview}
             alt="Prévia"
             style={{
-              width: "10%",
+              width: "20%",
               height: "auto",
               borderRadius: "8px",
               border: "2px solid #ccc",

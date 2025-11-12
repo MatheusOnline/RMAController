@@ -7,7 +7,7 @@ import Scan from "../../components/Scan"
 import ImageUploader from "../../components/ImagemUpload";
 
 function ScanerPage(){
-  const [code, setCode] = useState("12424");
+  const [code, setCode] = useState("");
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   
   const handleImage = (file: File) => {
