@@ -26,7 +26,7 @@ function Header() {
     <HeaderContainer>
       <Logo>RMA Controller</Logo>
       <ContainerStore>
-        <Linkbutton to="/Scaner">Escanear</Linkbutton>
+        <Linkbutton to="/leitor">Escanear</Linkbutton>
         <Linkbutton to="/return">Devoluçoes</Linkbutton>
         <Linkbutton to="/">Home</Linkbutton>
         <StoreLogo>

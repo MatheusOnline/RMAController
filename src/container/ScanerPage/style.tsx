@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Page = styled.main`
   width: 100%;
@@ -24,7 +25,7 @@ export const ContainerScan = styled.div`
   gap: 24px;
 `;
 
-export const ButtonExit = styled.button`
+export const ButtonExit = styled(Link)`
   width: 90%;
   max-width: 350px;
   height: 48px;

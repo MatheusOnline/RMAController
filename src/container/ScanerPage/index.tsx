@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom";
 import { Page, ContainerScan, ButtonExit, ContainerContent,Wrapper,ConfimButton,ContainerReason, TextArea, ContainerObservation,ContainerItem, ItemDatas, CotainerDatasw, ImgItem, BuyerVideo } from "./style"
 
 //####FUNCOES#####
@@ -11,11 +12,11 @@ import ImageUploader from "../../components/ImagemUpload";
 
 
 function ScanerPage(){
+  const navigate = useNavigate();
+
   const [code, setCode] = useState("");
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [Observation, setObservation] = useState("")
-
-
 
     interface ReturnItem {
         name: string;
@@ -30,6 +31,7 @@ function ScanerPage(){
     }
 
     interface FormattedData {
+        shop_name: string;
         return_sn: string;
         status: string;
         reason: string;
@@ -38,6 +40,7 @@ function ScanerPage(){
         buyervideos: BuyerVideo[];
     }
   const [datas, setDatas] = useState<FormattedData | null>(null);
+
   const handleImage = (file: File) => {
     setSelectedImage(file);
     console.log("Imagem selecionada:", file);
@@ -60,7 +63,9 @@ function ScanerPage(){
         });
 
         const result = await response.json();
+        
         const formatted = {
+              shop_name: result.shop_name || "",
               return_sn: result.data.return_sn || "",
               reason: translateReason(result.data.reason) || "",
               status: translateStatus(result.data.status) || "",
@@ -79,6 +84,7 @@ function ScanerPage(){
 
         setDatas(formatted)
         console.log(formatted)
+        
     }catch(error){
       console.log(error)
     }
@@ -99,6 +105,7 @@ function ScanerPage(){
         const result = await response.json();
         console.log(result.data);
         alert(result.message || "Enviado com sucesso!");
+        navigate("/")
       } catch (error) {
         console.error("Erro ao enviar:", error);
         alert("Erro ao enviar os dados");
@@ -110,13 +117,15 @@ function ScanerPage(){
         <ContainerScan>
           <Scan onResult={(text) => setCode(text)} /> 
            
-          <ButtonExit >Parar leitura</ButtonExit>
+          <ButtonExit to="/">Parar leitura</ButtonExit>
           
         </ContainerScan>
       ) : (
         <ContainerContent>
           <Wrapper>
+
             <p>Id Pedido: {datas?.return_sn}</p>
+            <p>Vendedor: {datas?.shop_name}</p>
             <br />
             <p>Status da solicitação: {datas?.status}</p>
             <p>Motivo da devolução: {datas?.reason}</p>
@@ -169,6 +178,7 @@ function ScanerPage(){
                 <p>Quantidade: {product.amount}</p>
               </CotainerDatasw>
             </ContainerItem>
+            
               ))}
           </Wrapper>
 
