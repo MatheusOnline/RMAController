@@ -51,7 +51,7 @@ function ScanerPage(){
 
   async function SeachReturn(code:String){
     try{
-        const response = await fetch("http://localhost:5000/return/scan", {
+        const response = await fetch("https://rmabackend-zuvt.onrender.com/return/scan", {
           method: "POST",
           headers: {
             "Content-Type": "application/json", 
@@ -91,7 +91,7 @@ function ScanerPage(){
       formData.append("imagen", selectedImage || ""); 
 
       try {
-        const response = await fetch("http://localhost:5000/return/finish", {
+        const response = await fetch("https://rmabackend-zuvt.onrender.com/return/finish", {
           method: "POST",
           body: formData,
         });
