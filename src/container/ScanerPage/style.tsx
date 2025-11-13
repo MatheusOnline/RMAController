@@ -168,21 +168,36 @@ export const ContainerUploader = styled.div`
   }
 `;
 
-
 export const ContainerItem = styled.div`
   display: flex;
   gap: 5px;
 `
+
 export const CotainerDatasw = styled.div`
   width: 90%;
   
 `
+
 export const ImgItem = styled.img`
   width: 25%;
 `
+
 export const ItemDatas = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
 
+`
+export const BuyerVideo = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 10px;
+  & img{
+    width: 25%;
+  }
+
+  & video{
+    width: 25%;
+  }
 `

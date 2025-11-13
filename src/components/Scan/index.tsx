@@ -1,45 +1,51 @@
-import {  useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BrowserQRCodeReader } from "@zxing/library";
 
 interface ScanProps {
-  onResult: (code: string) => void; // callback para retornar o resultado
+  onResult: (text: string) => void;
 }
 
-
-function Scan ({ onResult }: ScanProps) {
+function Scan({ onResult }: ScanProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  
-  
+  const [isScanning, setIsScanning] = useState(true);
+
   useEffect(() => {
     const codeReader = new BrowserQRCodeReader();
+    let timeoutId: NodeJS.Timeout;
 
-    if (videoRef.current) {
-      codeReader
-        .decodeFromVideoDevice(null, videoRef.current, (result, err) => {
-          if (result) {
-            onResult(result.getText());
-            codeReader.reset(); // Para a leitura após ler o QR
-          }
-          if (err && err.name !== "NotFoundException") {
-            console.error("Erro ao ler QR:", err);
-          }
-        })
-        .catch((err) => console.error("Erro ao iniciar câmera:", err));
-    }
+    const startScan = async () => {
+      if (!videoRef.current) return;
+
+      try {
+        const result = await codeReader.decodeOnceFromVideoDevice(undefined, videoRef.current);
+        if (result) {
+          onResult(result.getText());
+          setIsScanning(false);
+          return;
+        }
+      } catch (err: any) {
+        // Ignora erros de "não encontrado"
+        if (err.name !== "NotFoundException") {
+          console.error("Erro ao ler QR:", err);
+        }
+      }
+
+      // agenda a próxima leitura em 4 segundos
+      if (isScanning) {
+        timeoutId = setTimeout(startScan, 8000);
+      }
+    };
+
+    startScan();
 
     return () => {
-      codeReader.reset(); // Limpa a câmera quando o componente desmonta
+      setIsScanning(false);
+      clearTimeout(timeoutId);
+      codeReader.reset();
     };
-  }, []);
+  }, [isScanning, onResult]);
 
-  return (
-    <div style={{width: "100%" }}>
-      <video
-        ref={videoRef}
-        style={{ width: "100%", borderRadius: "8px" }}
-      />
-    </div>
-  );
-};
+  return <video ref={videoRef} style={{ width: "100%", borderRadius: "8px" }} />;
+}
 
 export default Scan;
