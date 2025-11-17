@@ -19,5 +19,9 @@ export const HeaderContainer = styled.header`
 export const Logo = styled.img`
   color: #fff;
   width: 10%;
+
+  @media (max-width: 768px) {
+        width: 20%;
+    }
 `;
 

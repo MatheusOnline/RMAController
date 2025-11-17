@@ -7,6 +7,10 @@ export const ContainerProfile = styled.div`
     box-sizing: border-box;
     display: flex;
     gap: 5%;
+
+    @media (max-width: 768px) {
+        width: 35%;
+    }
 `
 
 export const ImgIconProfile = styled.img`

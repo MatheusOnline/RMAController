@@ -39,6 +39,11 @@ export const LinkButton = styled(Link)`
     color:  #FFFFFF;
     text-decoration: none;
     font-size: 20px;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
+
 `
 
 export const Line = styled.hr`
@@ -58,4 +63,8 @@ export const ExitButton = styled.button`
     display: flex;
     align-items: center;
     gap: 5px;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 `
