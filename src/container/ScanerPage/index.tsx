@@ -54,6 +54,7 @@ function ScanerPage(){
 
   async function SeachReturn(code:String){
     try{
+        
         const response = await fetch("https://rmabackend-zuvt.onrender.com/return/scan", {
           method: "POST",
           headers: {
@@ -63,7 +64,11 @@ function ScanerPage(){
         });
 
         const result = await response.json();
-        
+        console.log("RESPOSTA DO BACKEND:", result);
+        if (!result.success) {
+          alert(result.error || "Devolução não encontrada.");
+          return; // <-- PARA AQUI
+        }
         const formatted = {
               shop_name: result.shop_name || "",
               return_sn: result.data.return_sn || "",
