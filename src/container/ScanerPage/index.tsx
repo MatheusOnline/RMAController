@@ -64,10 +64,17 @@ function ScanerPage(){
         });
 
         const result = await response.json();
-        console.log("RESPOSTA DO BACKEND:", result);
         if (!result.success) {
-          alert(result.error || "Devolução não encontrada.");
-          return; // <-- PARA AQUI
+          const escolha = window.confirm(
+            "Essa devolução não está cadastrada. Deseja cadastrar manualmente?"
+          );
+          if (escolha) {
+            // Usuário clicou em "OK"
+            navigate("/cadastrar-manual"); // ou qualquer rota que você usa
+          } else {
+            // Usuário clicou em "Cancelar"
+            alert("Operação cancelada.");
+          }
         }
         const formatted = {
               shop_name: result.shop_name || "",
