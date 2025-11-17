@@ -72,6 +72,7 @@ function Return() {
                         status: translateStatus(ret.status),
                         item_price: ret.item_price || "",
                         dateCreated: new Date(ret.create_time * 1000).toLocaleDateString("pt-BR"),
+                        rawDate: ret.create_time
                 }));
             
             // Ordenar pela data mais recente
