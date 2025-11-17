@@ -23,6 +23,9 @@ export const NameShop = styled.p`
     width: 100%;
     color: #FFFFFF;
     font-size: 18px;
+    white-space: nowrap;      /* não quebra linha */
+    overflow: hidden;         /* esconde o que passar */
+    text-overflow: ellipsis;  /* coloca "…" no final */
 `
 export const StatusShop = styled.p`
     color: #1afc1a;
