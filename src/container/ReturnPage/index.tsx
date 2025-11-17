@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import {Page, FunctionBar, ButtonRefresh, RefreshIcon, ContainerInput, InputSeach, SeachIcon, ContainerNotreturn, WapperNoReturn, TextNoReturn, TableReturn, ContainerPage, SelectStatus,ContainerSelect } from "./style";
 
 //=======COMPONENTES========//
-import Header from "../../components/header/header";
 import ReturnCard from "../../components/Return_Card/Index";
 import LoadScreen from "../../components/Load";
 function Return() {
@@ -139,7 +138,6 @@ function Return() {
 
     return (
         <Page>
-            <Header/>
             {loading ? 
             (
                 <LoadScreen/>

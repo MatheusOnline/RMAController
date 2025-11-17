@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import { GlobalStyle } from '../styles/GlobalStyle.tsx';
+
 
 //components
 import CardIndex from '../components/cardIndex.tsx'
 
-import Header from '../components/header/header.tsx';
 //Services
 
 
@@ -24,8 +23,6 @@ function Home (){
 
     return(
         <>
-            <GlobalStyle />
-            <Header/>
             <ListCard>
                 
                 <CardIndex descript="Total de Casos Ativos" count={12} color="#125f8b" />

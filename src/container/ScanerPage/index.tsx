@@ -97,7 +97,7 @@ function ScanerPage(){
       formData.append("imagen", selectedImage || ""); 
 
       try {
-        const response = await fetch("https://rmabackend-zuvt.onrender.com/return/finish", {
+        const response = await fetch("http://localhost:5000/return/finish", {
           method: "POST",
           body: formData,
         });
