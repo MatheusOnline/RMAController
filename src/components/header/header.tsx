@@ -1,4 +1,4 @@
-import { HeaderContainer, Logo} from "./header.style.tsx";
+import { HeaderContainer, Logo} from "./style.tsx";
 
 import BrandLogo from "../../assets/logos/Devolu (1).png"
 

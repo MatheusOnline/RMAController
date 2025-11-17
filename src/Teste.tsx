@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Home from "./container/Home";
 import QrReader from "./container/ScanerPage";
-import ShopeeAuth from "./container/Auth";
+import ShopeeAuth from "./container/ConnectShopPage";
 import Return from "./container/ReturnPage";
 import DetailPage from "./container/DetailPage";
 

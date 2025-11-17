@@ -5,6 +5,7 @@ import styled from "styled-components";
 export const HeaderContainer = styled.header`
     width: 100%;
     height: 70px;
+    position: fixed;
     background-color: var(--brand-color); /* tom escuro */
     display: flex;
     align-items: center;

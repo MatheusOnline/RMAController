@@ -5,8 +5,6 @@ import { Page, ContainerDivision, ContainerDetails, ReturnHisto, CardDetail, Hea
        ImgPortrait, CardContent, Line, ContainerReason,CardProduct ,ProductImg, ProductContent, FlexLine,
        ButtonPrimary, ButtonSegundary, ContainerButtons, Modal, Topic, BuyerVideo, BuyerVideos, UpLine, ContainerTracking,ContainerLine } from "./style";
        
-import { GlobalStyle } from "../../styles/GlobalStyle";
-import Header from "../../components/header/header";
 import LoadScreen from "../../components/Load";
 
 //##### FUNCOES UTILS #####//
@@ -161,8 +159,6 @@ function DetailPage(){
     
     return(
         <Page>
-            <GlobalStyle/>
-            <Header/>
 
             {modalOpen && (
                 <Modal onClick={closeModal}>

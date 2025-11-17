@@ -1,39 +1,53 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom";
 import { ContainerProfile, ImgIconProfile, ShopDatas, NameShop, StatusShop, ConnectedButton } from "./style"
 
 import { VscDebugDisconnect } from "react-icons/vsc";
 
 function ProfileIcon(){
-   const [Connected, setConnected] = useState(false)
-   
+    const navigate = useNavigate();
+
+    const [connected, setConnected] = useState(!!localStorage.getItem("shop_id"));
+    const [nameShop, setNameShop] = useState(localStorage.getItem("nameShop") || "");
+    const [logoShop, setLogoShop] = useState(localStorage.getItem("logoShop") || "");
+
+    useEffect(() => {
+        function updateShop() {
+            setConnected(!!localStorage.getItem("shop_id"));
+            setNameShop(localStorage.getItem("nameShop") || "");
+            setLogoShop(localStorage.getItem("logoShop") || "");
+        }
+
+        window.addEventListener("shopConnected", updateShop);
+
+        return () => {
+            window.removeEventListener("shopConnected", updateShop);
+        };
+    }, []);
+
     function ConnectShop(){
-        setConnected(true)
+        navigate("/auth");
     }
 
     return(
         <ContainerProfile>
-            {!Connected && (
+            {!connected && (
                 <ConnectedButton onClick={ConnectShop}>
                     <VscDebugDisconnect color="White"/> Conectar Loja
                 </ConnectedButton>
             )}
 
-            {Connected && (
+            {connected && (
                 <>
-                    <ImgIconProfile 
-                        alt="Logo da loja" 
-                        src="https://cf.shopee.com.br/file/br-11134216-7r98o-ltfmk6umvqpr5a"
-                    />
-
+                    <ImgIconProfile alt="Logo da loja" src={logoShop} />
                     <ShopDatas>
-                        <NameShop>ShopeBem</NameShop>
+                        <NameShop>{nameShop}</NameShop>
                         <StatusShop>Conectado</StatusShop>
                     </ShopDatas>
                 </>
             )}
         </ContainerProfile>
     )
-
 }
 
-export default ProfileIcon
+export default ProfileIcon;

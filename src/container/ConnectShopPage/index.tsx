@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import {  useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
-import CardLink from "../components/Cards/cardLink";
+import CardLink from "../../components/Cards/cardLink";
+
 export const CardsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -13,31 +14,36 @@ export const CardsContainer = styled.div`
 
 
 const ShopeeAuth: React.FC = () => {
-  const [token, setToken] = useState("");
   const [searchParams] = useSearchParams();
 
   const code = searchParams.get("code");
   const shopId = searchParams.get("shop_id");
+  const backendURL = import.meta.env.VITE_ROUTE_TEST;
 
-  // Pega token
+  // 
+  // Funçao para gerar o tokem de acesso
+  // ele precisa do code e o shop_id quem vem na url
+  //
   const getTokenShopLevel = async () => {
     try {
-      const res = await fetch("https://rmabackend-zuvt.onrender.com/token/generate", {
+      const res = await fetch(`${backendURL}/token/generate`,  {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code, shop_id: shopId })
       });
 
+      //Salva no localStorage o token
+      //Pretendo mudar essa rota para o backend (acho que nao precisa do token no front mais)
       const data = await res.json();
-      console.log("Token data:", data);
-      setToken(data.access_token); 
       localStorage.setItem("token", data.access_token)
+      
+      GetProfile();
+
       if (shopId) {
         localStorage.setItem("shop_id", shopId);
       }
     } catch (error) {
-      console.error("Erro ao gerar token:", error);
-      alert("Erro ao gerar token");
+      alert("Erro ao conenctar a loja");
     }
   };
 
@@ -46,27 +52,25 @@ const ShopeeAuth: React.FC = () => {
     if (code && shopId) getTokenShopLevel();
   }, [code, shopId]);
 
-  // Chama GetProfile depois que o token chegar
-  useEffect(() => {
-    if (token && shopId) GetProfile();
-  }, [token]);
 
-  // Busca perfil
+  // 
+  // Busca os dados da loja para o header(Nome e logo)
+  // Usa so o shop_Id que ta salvo no local storage
+  //
   const GetProfile = async () => {
     try {
-      const res = await fetch("https://rmabackend-zuvt.onrender.com/shop/datas", {
+      const res = await fetch(`${backendURL}/shop/datas`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ shop_id: shopId })
       });
 
       const data = await res.json();
-      console.log(data)
-      localStorage.setItem("logo", data.response.shop_logo)
-      window.dispatchEvent(new CustomEvent("logoUpdate", { detail: localStorage.getItem("logo") }));
+      localStorage.setItem("logoShop", data.response.shop_logo)
+      localStorage.setItem("nameShop", data.response.shop_name)
       
+      window.dispatchEvent(new Event("shopConnected"));
     } catch (error) {
-      console.error("Erro ao buscar perfil:", error);
       alert("Erro ao buscar perfil");
     }
   };
