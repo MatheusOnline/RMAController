@@ -59,7 +59,7 @@ function Return() {
                     body: JSON.stringify({ shop_id: shopIdParam }),
                 });
             const data = await res.json();
-
+            console.log(data)
             if (data && data.return_list) {
                 const formatted = data.return_list.map((ret: any) => ({
                         portrait: ret.user?.portrait || "",
