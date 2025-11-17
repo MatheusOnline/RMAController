@@ -26,7 +26,7 @@ const ShopeeAuth: React.FC = () => {
   //
   const getTokenShopLevel = async () => {
     try {
-      const res = await fetch(`${backendURL}/token/generate`,  {
+      const res = await fetch(`https://rmabackend-zuvt.onrender.com/token/generate`,  {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code, shop_id: shopId })
@@ -35,6 +35,7 @@ const ShopeeAuth: React.FC = () => {
       //Salva no localStorage o token
       //Pretendo mudar essa rota para o backend (acho que nao precisa do token no front mais)
       const data = await res.json();
+      console.log(data)
       localStorage.setItem("token", data.access_token)
       
       GetProfile();
