@@ -11,15 +11,14 @@ import { MdOutlineQrCodeScanner } from "react-icons/md";
 import { IoExitOutline } from "react-icons/io5";
 import { VscDebugDisconnect } from "react-icons/vsc";
 
-//##COMPONENTES##//
-import ProfileIcon from "../ProfileIcon/profileIcon";
+
 
 function MainNavBar(){
     const location = useLocation();
 
     return(
         <NavBarContainer>
-            <ProfileIcon/>
+            
            
             <Nav>
                 <ItemList active={location.pathname === "/home"}>
@@ -42,9 +41,9 @@ function MainNavBar(){
                     <LinkButton to="scanner">Scaner</LinkButton>
                 </ItemList>
 
-                <ItemList active={location.pathname === "/sing"}>
+                <ItemList active={location.pathname === "/auth"}>
                     <VscDebugDisconnect color="white"/>
-                    <LinkButton to="sing">Conectar</LinkButton>
+                    <LinkButton to="auth">Conectar</LinkButton>
                 </ItemList>
             </Nav>
             <br />

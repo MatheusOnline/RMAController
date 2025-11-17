@@ -9,7 +9,8 @@ export const HeaderContainer = styled.header`
     display: flex;
     align-items: center;
     padding: 0 2rem;
-    
+    box-sizing: border-box;
+    justify-content: space-between;
     font-family: Arial, Helvetica, sans-serif;
    
 `;

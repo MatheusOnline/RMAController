@@ -73,8 +73,7 @@ const ShopeeAuth: React.FC = () => {
   };
 
   return (
-    <div>
-      <Header/>
+    <div >
       <CardsContainer>
         <CardLink 
           img="https://cdn.awsli.com.br/800x800/2015/2015798/produto/354645871/shoppe--2--mvj1hgvttt.png" 

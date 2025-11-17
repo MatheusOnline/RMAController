@@ -1,26 +1,25 @@
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 //=========Styles========//
 import {Page, FunctionBar, ButtonRefresh, RefreshIcon, ContainerInput, InputSeach, SeachIcon, ContainerNotreturn, WapperNoReturn, TextNoReturn, TableReturn, ContainerPage, SelectStatus,ContainerSelect } from "./style";
 
 //=======COMPONENTES========//
 import ReturnCard from "../../components/Return_Card/Index";
 import LoadScreen from "../../components/Load";
+
+import translateReason from "../../utils/translateReason";
+import translateStatus from "../../utils/translateStatus";
 function Return() {
     const [returns, setReturns] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [status, setStatus] = useState("")
-    
 
     var storedShopId:string;
+
+    const navigate = useNavigate();
     //=========FUNCAO CHAMADA NA HORA QUE A PAGINA É CARREGADA======//
     useEffect(() => {
-        const storedShopId = localStorage.getItem("shop_id");
-        if (!storedShopId) {
-            alert("Token ou ID da loja está faltando");
-            return;
-        }
 
         const cached = sessionStorage.getItem("returns");
 
@@ -29,7 +28,7 @@ function Return() {
             setReturns(JSON.parse(cached));
         } else {
             console.log("📡 Buscando devoluções no servidor...");
-            GetReturn(storedShopId);
+            CallFunctionReturn();
         }
         
     }, []);
@@ -42,7 +41,8 @@ function Return() {
         if ( storedShopId) {
             GetReturn(storedShopId);
         }else{
-            alert("Token ou Id da loja está faltando")
+            alert("Token ou Id da loja está faltando aa")
+            navigate('/auth')
         }
     }
 
@@ -51,8 +51,7 @@ function Return() {
         try {
                 
             setLoading(true);
-
-
+            
             const res = await fetch("https://rmabackend-zuvt.onrender.com/return/get",
                 {
                     method: "POST",
@@ -61,7 +60,6 @@ function Return() {
                 });
             const data = await res.json();
 
-            console.log("Resposta da Shopee:", JSON.stringify(data, null, 2));
             if (data && data.return_list) {
                 const formatted = data.return_list.map((ret: any) => ({
                         portrait: ret.user?.portrait || "",
@@ -85,36 +83,9 @@ function Return() {
             alert("Erro ao buscar devoluçõesaaaa");
         } finally{ 
             setLoading(false); 
-            }
-    }
-
-    //=========FUNCAO PARA TRADUZIR O STATUS==========//
-    function translateStatus(status:string){
-        const translations: Record<string, string> = {
-            ACCEPTED: "Aceito",
-            CANCELLED: "Cancelado",
-            PROCESSING: "Processamento",
-            REQUESTED: "Solicitada",
-            COMPLETED: "Concluído",
-            JUDGING: "Julgamento"
-        };
-        return translations[status.toUpperCase()] || status
-    }
-    
-    //===========FUNCAO PARA TRADUZIR A REAÇAO==========//
-    function translateReason(reason:string){
-        const translations: Record<string, string> = {
-            ITEM_MISSING: "ITEM FALTANDO",
-            FUNCTIONAL_DMG: "FUNCIONAL COM DANO",
-            DAMAGED_OTHERS:"DEMAIS TIPOS DE DANO",
-            NOT_RECEIPT: "NÃO RECEBI",
-            CHANGE_MIND: "MUDEI DE IDEIA",
-            WRONG_ITEM: "ITEM ERRADO",
-            OUTER_DAMAGED_PACKAGE: "EMBALAGE DANIFICADA"   
         }
-
-        return translations[reason.toUpperCase() || reason]
     }
+
 
     //========FILTRA AS DEVOLUCOES PELO NOME E PELO ESTATUS========//
    const filteredReturns = returns.filter((ret) => {

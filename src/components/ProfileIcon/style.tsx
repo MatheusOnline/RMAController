@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
 export const ContainerProfile = styled.div`
-    width: 100;
-    height: 10%;
-    border: 1px solid #FFFFFF;
-  
+    width: 10%;
+    height: 90%;
     padding: 12px;
     box-sizing: border-box;
     display: flex;
@@ -12,7 +10,7 @@ export const ContainerProfile = styled.div`
 `
 
 export const ImgIconProfile = styled.img`
-    width: 30%;
+    
 
 ` 
 export const ShopDatas = styled.div`
@@ -24,9 +22,23 @@ export const ShopDatas = styled.div`
 export const NameShop = styled.p`
     width: 100%;
     color: #FFFFFF;
-    font-size: 20px;
+    font-size: 18px;
 `
-
 export const StatusShop = styled.p`
     color: #1afc1a;
+`
+export const ConnectedButton = styled.button`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #77cfdf;
+    border-radius: 6px;
+    background-color:transparent ;
+    
+    color: #FFFFFF;
+    font-size: 16px;
+    cursor: pointer;
+
 `
