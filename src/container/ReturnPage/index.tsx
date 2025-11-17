@@ -73,7 +73,9 @@ function Return() {
                         item_price: ret.item_price || "",
                         dateCreated: new Date(ret.create_time * 1000).toLocaleDateString("pt-BR"),
                 }));
-
+            
+            // Ordenar pela data mais recente
+            formatted.sort((a: any, b: any) => b.rawDate - a.rawDate);
             setReturns(formatted);
             sessionStorage.setItem("returns", JSON.stringify(formatted));
             } else{
