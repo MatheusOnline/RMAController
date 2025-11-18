@@ -128,8 +128,15 @@ function DetailPage(){
             })
 
             const response = await res.json();
-            console.log(response.datas)
-            setTrackingDatas(response.datas.response.tracking_info);
+            
+            if(response.success)
+            {
+                console.log(response.datas)
+                setTrackingDatas(response.datas.response.tracking_info);
+            }
+            if(!response.success){
+                setTrackingDatas(response.message)
+            }
         }catch(error){
             alert(error)
         }finally{ 
