@@ -1,11 +1,14 @@
+import "./App.css"
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { GlobalStyle } from './styles/GlobalStyle'
-import "./App.css"
+import { BrowserRouter } from "react-router-dom";
+
+
 import Teste from './Teste'
+
 import MainNavBar from './components/NavBar/mainNavBar'
 import Header from './components/header/header'
-import { BrowserRouter } from "react-router-dom";
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
@@ -18,7 +21,6 @@ createRoot(document.getElementById('root')!).render(
             <Teste />
           </div>
         </div>
-        
       </div>
     </BrowserRouter>
   </StrictMode>,

@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
 import CardLink from "../../components/Cards/cardLink";
+import { Page } from "./style";
 
 export const CardsContainer = styled.div`
   display: flex;
@@ -77,7 +78,7 @@ const ShopeeAuth: React.FC = () => {
   };
 
   return (
-    <div >
+    <Page >
       <CardsContainer>
         <CardLink 
           img="https://cdn.awsli.com.br/800x800/2015/2015798/produto/354645871/shoppe--2--mvj1hgvttt.png" 
@@ -85,7 +86,7 @@ const ShopeeAuth: React.FC = () => {
           description="Conecte sua loja da shopee para controlar as devolucoes"
         />
       </CardsContainer>
-    </div>
+    </Page>
   );
 };
 
