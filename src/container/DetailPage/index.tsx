@@ -279,15 +279,20 @@ function DetailPage(){
                     <CardDetail>
                         <Topic>Historico de transporte</Topic>
                         <Line></Line>
-                    {trackingDatas && trackingDatas.map((item, index) => (
-                        <ContainerTracking key={index}>
-                        <h4>{item.tracking_description}</h4>
-                        <p>{new Date(item.update_time * 1000).toLocaleDateString("pt-BR")}</p>
+                    {Array.isArray(trackingDatas) && trackingDatas.length > 0 ? (
+                        trackingDatas.map((item, index) => (
+                            <ContainerTracking key={index}>
+                                <h4>{item.tracking_description}</h4>
+                                <p>{new Date(item.update_time * 1000).toLocaleDateString("pt-BR")}</p>
 
-                        {/* Linha entre os itens, exceto no último */}
-                        {index < trackingDatas.length - 1 && <ContainerLine><UpLine/> </ContainerLine>}
-                        </ContainerTracking>
-                    ))}
+                                {index < trackingDatas.length - 1 && (
+                                    <ContainerLine><UpLine/></ContainerLine>
+                                )}
+                            </ContainerTracking>
+                        ))
+                    ) : (
+                        <p>Sem rota de transporte</p>
+                    )}
                     </CardDetail>
                 </ReturnHisto>
             </ContainerDivision>
