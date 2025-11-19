@@ -1,9 +1,9 @@
 import { ButtonRefreshItem } from "./style"
 
 import { MdOutlineRefresh } from "react-icons/md";
-function ButtonRefresh(){
+function ButtonRefresh({onClick}:any){
     return(
-        <ButtonRefreshItem>
+        <ButtonRefreshItem onClick={onClick}>
 
             <MdOutlineRefresh size={"25px"} color={"#666"}/>
         

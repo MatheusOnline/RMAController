@@ -9,7 +9,7 @@ export const Page = styled.main`
 `
 
 export const ContainerPage = styled.div`
-    
+    height: 100%;
     padding-left: 20px;
     padding-right: 20px;
     font-family: Arial, Helvetica, sans-serif;
@@ -59,13 +59,13 @@ export const TextNoReturn = styled.p`
 
 export const TableContainer = styled.div`
     width: 100%;
-    height: 100%;
+    height: 90%;
     background: #fff;
 `
 
 export const TableScroll = styled.div`
     width: 100%;
-    max-height: 500px;
+    max-height: 80%;
     
     overflow-x: hidden;
     

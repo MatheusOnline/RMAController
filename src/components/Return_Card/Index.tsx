@@ -21,7 +21,7 @@ interface ReturnData {
   reason: string;
   status: string;
   dateCreated: string;
-  item_price: string;
+ 
 }
 
 interface Props {
@@ -55,10 +55,6 @@ function ReturnCard({ datas }: Props) {
           <div>
             <Label>Status:</Label>
             <Value>{datas.status}</Value>
-          </div>
-          <div>
-            <Label>Valor:</Label>
-            <Value>{datas.item_price}</Value>
           </div>
           <div>
             <Label>Data:</Label>

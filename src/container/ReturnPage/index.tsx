@@ -37,7 +37,7 @@ function Return() {
             setReturns(JSON.parse(cached));
         } else {
             console.log("📡 Buscando devoluções no servidor...");
-            CallFunctionReturn();
+            // CallFunctionReturn();
         }
         
     }, []);
@@ -98,6 +98,7 @@ function Return() {
         }
     }
 
+    
    
     //========FILTRA AS DEVOLUCOES PELO NOME E PELO ESTATUS========//
    const filteredReturns = returns.filter((ret) => {
@@ -148,7 +149,7 @@ function Return() {
 
                        
                         <TableContainer>
-                            <ReturnsSummary><ButtonRefresh/> {filteredReturns.length} Devoluções Encontrada <br /><p> Ultima Atualizaçao {new Date().toLocaleString()}</p></ReturnsSummary>
+                            <ReturnsSummary><ButtonRefresh onClick={CallFunctionReturn}/> {filteredReturns.length} Devoluções Encontrada <br /><p> Ultima Atualizaçao {new Date().toLocaleString()}</p></ReturnsSummary>
                             {filteredReturns.length > 0 ? 
                             ( 
                                 <TableScroll>
@@ -157,23 +158,23 @@ function Return() {
                                             <ReturnCard  key={index} datas={ret} />
                                         ))}
                                     </TableReturn>
-                                <FoosterTable>
-                                <PageButton 
-                                    disabled={currentPage === 1}
-                                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                                >
-                                    <IoIosArrowBack/>
-                                </PageButton>
+                                    <FoosterTable>
+                                        <PageButton 
+                                            disabled={currentPage === 1}
+                                            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                                        >
+                                            <IoIosArrowBack/>
+                                        </PageButton>
 
-                                {currentPage} / {totalPages}
+                                        {currentPage} / {totalPages}
 
-                                <PageButton
-                                    disabled={currentPage === totalPages}
-                                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                                >
-                                    <IoIosArrowForward/>
-                                </PageButton>
-                            </FoosterTable>
+                                        <PageButton
+                                            disabled={currentPage === totalPages}
+                                            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                                        >
+                                            <IoIosArrowForward/>
+                                        </PageButton>
+                                    </FoosterTable>
                             </TableScroll>
                             ) 
                             : 
