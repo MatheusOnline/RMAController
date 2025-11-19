@@ -4,7 +4,7 @@ import { ContainerRadios, ItemRadios, InputRadio, LabelRadio } from "./style";
 function RadioStatus({onSelect} :any) {
 
   
-  const statuses = ["TODAS", "SOLICITADO", "EM TRANSPORTE", "RECEBIDO", "FINALIZADO", "EM DISPUTA"];
+  const statuses = ["TODAS", "SOLICITADA", "EM TRANSPORTE", "RECEBIDO", "FINALIZADO", "EM DISPUTA"];
 
   return (
     <ContainerRadios>
