@@ -1,17 +1,11 @@
 import {  useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import styled from "styled-components";
+
 
 import CardLink from "../../components/Cards/cardLink";
-import { Page } from "./style";
+import { Page, CardsContainer, DetailContainer,HeaderDetail } from "./style";
 
-export const CardsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
-  padding: 2rem;
-`;
+
 
 
 const ShopeeAuth: React.FC = () => {
@@ -79,6 +73,22 @@ const ShopeeAuth: React.FC = () => {
 
   return (
     <Page >
+      <DetailContainer>
+        <HeaderDetail>
+          <h1>Conectar Loha</h1>
+          <p>Para começar, conecte sua loja Shopee.</p>
+          <p>Após a conexão, você poderá começar a controlar suas devoluçoes de forma facil</p>
+        </HeaderDetail>
+        <div>
+          <ul>
+            <li>Veja todas as devoluçoes</li>
+            <li>Atualização automática </li>
+            <li>Integraçao segura</li>
+            <li>Controle simplificado</li>
+          </ul>
+        </div>
+      </DetailContainer>
+
       <CardsContainer>
         <CardLink 
           img="https://cdn.awsli.com.br/800x800/2015/2015798/produto/354645871/shoppe--2--mvj1hgvttt.png" 
