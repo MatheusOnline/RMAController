@@ -37,7 +37,7 @@ function Return() {
             setReturns(JSON.parse(cached));
         } else {
             console.log("📡 Buscando devoluções no servidor...");
-            // CallFunctionReturn();
+             CallFunctionReturn();
         }
         
     }, []);
