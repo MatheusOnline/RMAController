@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { ContainerRadios, ItemRadios, InputRadio, LabelRadio } from "./style";
 
 function RadioStatus({onSelect} :any) {
