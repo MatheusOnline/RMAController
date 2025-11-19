@@ -1,20 +1,29 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 //=========Styles========//
-import {Page, FunctionBar, ButtonRefresh, RefreshIcon, ContainerInput, InputSeach, SeachIcon, ContainerNotreturn, WapperNoReturn, TextNoReturn, TableReturn, ContainerPage, SelectStatus,ContainerSelect } from "./style";
+import {Page, TitleSection ,FunctionBar, PageButton, 
+     ContainerNotreturn, WapperNoReturn, TextNoReturn, TableReturn, ContainerPage, ReturnsSummary, TableScroll,TableContainer,FoosterTable } from "./style";
 
 //=======COMPONENTES========//
 import ReturnCard from "../../components/Return_Card/Index";
 import LoadScreen from "../../components/Load";
+import RadioStatus from "../../components/Inputs/RadioStatus/RadioStatus";
+import InputSearch from "../../components/Inputs/InputSearch/InputSearch";
+import ButtonRefresh from "../../components/Inputs/ButtonRefresh/ButtonRefresh"; 
 
+
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
+//======FUNCOES=======//
 import translateReason from "../../utils/translateReason";
 import translateStatus from "../../utils/translateStatus";
 function Return() {
     const [returns, setReturns] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
-    const [status, setStatus] = useState("")
-
+    const [status, setStatus] = useState("TODAS");
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 25;
     var storedShopId:string;
 
     const navigate = useNavigate();
@@ -89,11 +98,11 @@ function Return() {
         }
     }
 
-
+   
     //========FILTRA AS DEVOLUCOES PELO NOME E PELO ESTATUS========//
    const filteredReturns = returns.filter((ret) => {
         // filtro por nome digitado
-        const buyerMatch = ret.buyerName.toLowerCase().includes(searchTerm.toLowerCase());
+        const buyerMatch = ret.id_request.toLowerCase().includes(searchTerm.toLowerCase());
 
         // status traduzido 
         const statusTraduzido = ret.status.toLowerCase();
@@ -103,12 +112,19 @@ function Return() {
 
         // filtro pelo select (se o select estiver vazio, ignora)
         const statusFilter =
-            status === "" || statusTraduzido === status.toLowerCase();
+            status === "TODAS" || statusTraduzido === status.toLowerCase();
 
         // resultado final
         return (buyerMatch || searchMatch) && statusFilter;
     });
 
+    const totalPages = Math.ceil(filteredReturns.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const currentReturns = filteredReturns.slice(startIndex, startIndex + itemsPerPage);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchTerm, status]);
 
     return (
         <Page>
@@ -119,43 +135,53 @@ function Return() {
             ) 
             : 
             (
-                <ContainerPage>     
+                <ContainerPage>   
+                    <TitleSection>Filtros</TitleSection>  
                     <FunctionBar>
-                        <ButtonRefresh onClick={CallFunctionReturn}><RefreshIcon/></ButtonRefresh>
-                        <ContainerInput>
-                            <SeachIcon/>
-                            <InputSeach
-                                type="text"
-                                placeholder="Buscar pelo nome"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}/>
-                        </ContainerInput>
-                      
-                        <ContainerSelect >
-                           
-                            <SelectStatus value={status} onChange={(e) => setStatus(e.target.value)}>
-                                <option value="">Filtre pelo status</option>
-                                <option value="Aceito">Aceito</option>
-                                <option value="Processamento">Processamento</option>
-                                <option value="Cancelado">Cancelado</option>
-                                <option value="Solicitada">Solicitada</option>
 
-                            </SelectStatus>
-                        </ContainerSelect>
+                        <RadioStatus onSelect={setStatus} />
+                        
+                        <InputSearch onChange={setSearchTerm}/>
+                      
                     </FunctionBar>
 
-                    {filteredReturns.length > 0 ? 
-                    (
-                        <TableReturn>
-                            {filteredReturns.map((ret, index) => (
-                                <ReturnCard  key={index} datas={ret} />
-                            ))}
-                        </TableReturn>
-                    ) 
-                    : 
-                    (
-                        !loading && <ContainerNotreturn><WapperNoReturn><TextNoReturn>Nenhuma devolução encontrada.</TextNoReturn></WapperNoReturn></ContainerNotreturn>
-                    )}
+
+                       
+                        <TableContainer>
+                            <ReturnsSummary><ButtonRefresh/> {filteredReturns.length} Devoluções Encontrada <br /><p> Ultima Atualizaçao {new Date().toLocaleString()}</p></ReturnsSummary>
+                            {filteredReturns.length > 0 ? 
+                            ( 
+                                <TableScroll>
+                                    <TableReturn>
+                                        {currentReturns.map((ret, index) => (
+                                            <ReturnCard  key={index} datas={ret} />
+                                        ))}
+                                    </TableReturn>
+                                <FoosterTable>
+                                <PageButton 
+                                    disabled={currentPage === 1}
+                                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                                >
+                                    <IoIosArrowBack/>
+                                </PageButton>
+
+                                {currentPage} / {totalPages}
+
+                                <PageButton
+                                    disabled={currentPage === totalPages}
+                                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                                >
+                                    <IoIosArrowForward/>
+                                </PageButton>
+                            </FoosterTable>
+                            </TableScroll>
+                            ) 
+                            : 
+                            (
+                                !loading && <ContainerNotreturn><WapperNoReturn><TextNoReturn>Nenhuma devolução encontrada.</TextNoReturn></WapperNoReturn></ContainerNotreturn>
+                            )}
+                        </TableContainer>
+                    
                 </ContainerPage>
             )}
         </Page>

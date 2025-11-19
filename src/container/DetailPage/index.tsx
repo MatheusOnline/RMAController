@@ -138,7 +138,7 @@ function DetailPage(){
                 setTrackingDatas(response.message)
             }
         }catch(error){
-            alert(error)
+            console.log(error)
         }finally{ 
             setLoading(false); 
         }

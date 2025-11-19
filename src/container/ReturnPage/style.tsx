@@ -1,85 +1,38 @@
 import styled from "styled-components";
 
-//=========ICONS=========//
-import { LuRefreshCcw } from "react-icons/lu";
-import { BsSearch } from "react-icons/bs";
+
 
 export const Page = styled.main`
     width: 100%;
+    background-color: var(--background-color);
+    height: 100%;
 `
 
 export const ContainerPage = styled.div`
-    padding-top: 40px;
+    
     padding-left: 20px;
     padding-right: 20px;
     font-family: Arial, Helvetica, sans-serif;
 `
 
+export const TitleSection = styled.h2`
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--item-color);
+    padding: 10px 0px;
+`
+
 export const FunctionBar = styled.div`
     width: 100%;
-    height: 40px;
+    
     display: flex;
     flex-direction: row;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     gap: 35px;
-
-    border-bottom: 1px solid #c7c7c7;
+    justify-content: space-between;
     padding-bottom: 20px;
-`
-
-export const ButtonRefresh = styled.button`
-    background-color: #125f8bae;   
-    width: 50px;
-    height: 100%;
-    border-radius: 8px;
-    border: none;
-    transition: 0.3s ease;
-
-    &:hover{
-        background-color: #125f8b7a;
-        cursor: pointer;
-    }
-`
-
-export const RefreshIcon = styled(LuRefreshCcw)`
-    color: aliceblue;
-    width: 60%;
-    height: 60%;
-`
-
-export const ContainerInput = styled.label`
-    background-color: #125f8bae;
-    width: 250px;
-    display: flex;
     align-items: center;
-    border: 1px solid #125f8b;
-    border-radius: 6px;
-    color: aliceblue;
-
-`
-
-export const InputSeach = styled.input`
-    background-color: transparent;
-    width: 90%;
-    height: 100%;
-    border: none;
-    color: aliceblue;
-
-
-    &::placeholder{
-        color: aliceblue;
-        font-size: 12px;
-    }
-
-    &:focus{
-        outline: none;
-    }
-`
-
-export const SeachIcon = styled(BsSearch)`
-    color: aliceblue;
-    width: 20%;
-    height: 50%;
+    
 `
 
 export const ContainerNotreturn = styled.div`
@@ -89,7 +42,7 @@ export const ContainerNotreturn = styled.div`
 `
 
 export const WapperNoReturn = styled.div`
-    background: #125f8bae;
+    border:1px solid  var(--item-color);
     width: 30%;
     height: 60px;
     display: flex;
@@ -101,23 +54,70 @@ export const WapperNoReturn = styled.div`
 
 export const TextNoReturn = styled.p`
     font-size: 18px;
-    color: aliceblue;
+    color: var(--item-color);
 `
 
-export const TableReturn = styled.table`
+export const TableContainer = styled.div`
     width: 100%;
+    height: 100%;
+    background: #fff;
 `
 
-export const ContainerSelect = styled.div`
-    width: 200px;
-    height: 100%;
+export const TableScroll = styled.div`
+    width: 100%;
+    max-height: 500px;
+    
+    overflow-x: hidden;
+    
+    overflow-y: auto;
+    scroll-behavior: smooth;
+
+&::-webkit-scrollbar {
+    width: 6px;
+}
+&::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+    border-radius: 4px;
+}
+`
+
+export const TableReturn = styled.div`
+    width: 100%;
+    padding:  20px;
+    box-sizing: border-box;
+`
+
+export const ReturnsSummary = styled.div`
     display: flex;
-    align-items: center
-`;
-export const SelectStatus = styled.select`
-    background-color: #125f8bae;
-    color: aliceblue;
-    width: 90%;
-    height: 100%;
-    border-radius: 6px;
+    align-items: center;
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border-radius: 6px 6px 0px 0px;
+    color: #666;
+    background-color: #f3f3f3;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    gap: 10px;
+    & p{
+        font-size: 13px;
+        font-weight: 200;
+    }
+`
+
+export const FoosterTable = styled.div`
+    width: 100%;
+    display: flex;
+    padding: 10px 12px;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    color: var(--item-color);
+    box-sizing: border-box;
+`
+
+export const PageButton = styled.button`
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 `

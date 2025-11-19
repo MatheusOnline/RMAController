@@ -7,7 +7,7 @@ export const CardContainer = styled.div`
   background-color: #fff;
   border: 1px solid #dcdcdc;
   border-radius: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   overflow: hidden;
 `;
