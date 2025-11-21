@@ -23,4 +23,4 @@ function DailyChart() {
   );
 }
 
-export default DailyChart;
+export default DailyChart; 
