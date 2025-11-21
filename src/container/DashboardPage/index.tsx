@@ -11,34 +11,33 @@ import {
 } from "./style";
 
 import CardIndex from "../../components/cardIndex";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Dashboard() {
+  const [datas, setDatas] = useState<any | null>(null);
 
-
-  useEffect(() =>{
+  useEffect(() => {
     const shopId = localStorage.getItem("shop_id") || "";
     getDatas(shopId);
-  }, [])
-  async function getDatas(shopId:string) {
+  }, []);
 
-    
-    console.log(shopId)
-    
-    try{
+  async function getDatas(shopId: string) {
+    try {
       const response = await fetch("https://rmabackend-zuvt.onrender.com/dashboard/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ shop_id: shopId })
-      })
+      });
 
-      const datas = await response.json();
-      console.log(datas)
-    }catch(error){
-      alert(error)
+      const result = await response.json();
+
+      if (!result.success) return;
+
+      setDatas(result.datas); // <-- Salva tudo
+    } catch (error) {
+      alert(error);
     }
   }
-
 
   return (
     <Page>
@@ -46,10 +45,29 @@ function Dashboard() {
       <TitleSection>Dados Gerais</TitleSection>
 
       <ContainerCards>
-        <CardIndex descript="Quantidade de devoluções" count={125} color="#41afee" />
-        <CardIndex descript="Casos concluídos" count={12} color="#41afee" />
-        <CardIndex descript="Casos em julgamento" count={55} color="#41afee" />
-        <CardIndex descript="Casos pendentes" count={30} color="#41afee" />
+        <CardIndex 
+          descript="Quantidade de devoluções" 
+          count={datas?.totalCount?.[0]?.total || 0}
+          color="#41afee" 
+        />
+
+        <CardIndex 
+          descript="Casos concluídos" 
+          count={datas?.statusCount?.find((i:any) => i._id === "CONCLUIDA")?.total || 0}
+          color="#41afee" 
+        />
+
+        <CardIndex 
+          descript="Casos em transporte" 
+          count={datas?.statusCount?.find((i:any) => i._id === "EM TRANSPORTE")?.total || 0}
+          color="#41afee" 
+        />
+
+        <CardIndex 
+          descript="Casos solicitados" 
+          count={datas?.statusCount?.find((i:any) => i._id === "SOLICITADA")?.total || 0}
+          color="#41afee" 
+        />
       </ContainerCards>
 
       <Line />
@@ -59,12 +77,12 @@ function Dashboard() {
       <ChartsWrapper>
         <ChartCard>
           <h3>Motivos das Devoluções</h3>
-          <ReasonChart />
+          <ReasonChart data={datas?.reasonCount || []} />
         </ChartCard>
 
         <ChartCard>
           <h3>Devoluções por Dia</h3>
-          <DailyChart />
+          <DailyChart data={datas?.last7Days || []} />
         </ChartCard>
       </ChartsWrapper>
 
