@@ -1,4 +1,4 @@
-import { ContainerCard, Img } from "./cardLink.style";
+import { ContainerCard, Img, ContainerClick } from "./cardLink.style";
 
 
 import CryptoJS from "crypto-js";
@@ -30,7 +30,9 @@ function CardLink({img, store, description}:Datas){
         <ContainerCard onClick={GenerateAuthUrl}>
             <Img src={img} alt="" />
             <h1>{store}</h1>
-            <p>{description}</p>
+            <ContainerClick>
+                <p>{description}</p>
+            </ContainerClick>
         </ContainerCard>
     )
 }

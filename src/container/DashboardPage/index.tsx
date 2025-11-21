@@ -11,8 +11,35 @@ import {
 } from "./style";
 
 import CardIndex from "../../components/cardIndex";
+import { useEffect } from "react";
 
 function Dashboard() {
+
+
+  useEffect(() =>{
+    const shopId = localStorage.getItem("shop_id") || "";
+    getDatas(shopId);
+  }, [])
+  async function getDatas(shopId:string) {
+
+    
+    console.log(shopId)
+    
+    try{
+      const response = await fetch("https://rmabackend-zuvt.onrender.com/dashboard/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ shop_id: shopId })
+      })
+
+      const datas = await response.json();
+      console.log(datas)
+    }catch(error){
+      alert(error)
+    }
+  }
+
+
   return (
     <Page>
 

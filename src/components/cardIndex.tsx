@@ -24,9 +24,13 @@ const FooterCard = styled.div`
   width: 100%;
 `;
 
+
+
 const Text = styled.p`
   width: 100%;
   color: #3e3e3e;
+  
+ 
 `;
 
 interface Variables {
@@ -40,7 +44,9 @@ function CardIndex({ descript, count, color }: Variables) {
     <WrapCard style={{ borderTopColor: color }}>
       <ContentNumber style={{ color }}>{count}</ContentNumber>
       <FooterCard>
-        <Text>{descript}</Text>
+        
+          <Text>{descript}</Text>
+       
       </FooterCard>
     </WrapCard>
   );

@@ -16,11 +16,7 @@ export const ContainerCard = styled.button`
   text-align: center;
   padding: 1rem;
     
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
-  }
-
+ 
   h1 {
     font-size: 1.1rem;
     color: #222;
@@ -29,9 +25,15 @@ export const ContainerCard = styled.button`
   }
 
   p {
-    font-size: 0.95rem;
+    font-size: 16px;
+    font-weight: 500;
     color: #666;
-    margin-top: 0.5rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     transition: 0.10s ;
   }
 
 `;
@@ -42,3 +44,20 @@ export const Img = styled.img`
   object-fit: cover;
   border-radius: 12px;
 `;
+
+export const ContainerClick = styled.div`
+  width: 90%;
+  height: 40px;
+  box-sizing: border-box;
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  margin-top: 10px;
+  transition: 0.10s ;
+  & :hover{
+    background-color: #ff000092;
+    color: white;
+  }
+`
