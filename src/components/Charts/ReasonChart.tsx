@@ -1,10 +1,12 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 
+import translateReason from "../../utils/translateReason";
+
 function ReasonChart({ data }: any) {
   
   // Ajusta o formato dos dados para o gráfico
   const formatted = data.map((i: any) => ({
-    motivo: i._id,   // agora XAxis vai ler "motivo"
+    motivo: translateReason(i._id),   // agora XAxis vai ler "motivo"
     total: i.total
   }));
 
