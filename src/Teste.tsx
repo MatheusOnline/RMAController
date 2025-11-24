@@ -16,7 +16,7 @@ function Teste() {
     <Routes > 
       <Route element={<LoginVerify />}>
           <Route element={<ProtectedLayout />}>
-            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/scanner" element={<QrReader />} />
             <Route path="/auth" element={<ShopeeAuth />} />
             <Route path="/returns" element={<Return />} />

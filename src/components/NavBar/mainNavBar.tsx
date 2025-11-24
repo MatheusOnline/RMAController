@@ -23,7 +23,7 @@ function MainNavBar(){
             <Nav>
                 <ItemList active={location.pathname === "/home"}>
                     <FaHome color="white"/>
-                    <LinkButton to="home">Home</LinkButton>
+                    <LinkButton to="">Home</LinkButton>
                 </ItemList>
 
                 <ItemList active={location.pathname === "/dashboard"}>
