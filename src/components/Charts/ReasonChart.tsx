@@ -9,7 +9,7 @@ function ReasonChart({ data }: any) {
     motivo: translateReason(i._id),   // agora XAxis vai ler "motivo"
     total: i.total
   }));
-
+  console.log(formatted);
   return (
     <BarChart width={500} height={300} data={formatted}>
       <CartesianGrid strokeDasharray="3 3" />
