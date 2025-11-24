@@ -6,10 +6,10 @@ function ReasonChart({ data }: any) {
   
   // Ajusta o formato dos dados para o gráfico
   const formatted = data.map((i: any) => ({
-    motivo: translateReason(i._id),   // agora XAxis vai ler "motivo"
+    motivo: translateReason(i._id) || "OUTROS",   // agora XAxis vai ler "motivo"
     total: i.total
   }));
-  console.log(formatted);
+  
   return (
     <BarChart width={500} height={300} data={formatted}>
       <CartesianGrid strokeDasharray="3 3" />
