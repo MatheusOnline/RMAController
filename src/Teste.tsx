@@ -6,16 +6,26 @@ import ShopeeAuth from "./container/ConnectShopPage";
 import Return from "./container/ReturnPage";
 import DetailPage from "./container/DetailPage";
 import Dashboard from "./container/DashboardPage";
+import LoginPage from "./container/LoginPage";
+
+import LoginVerify from "./utils/loginVeify";
+
+import ProtectedLayout from "./layouts/ProtectedLayout";
 function Teste() {
   return (
-    <Routes>
-      <Route path="/home" element={<Home />} />
-      <Route path="/scanner" element={<QrReader />} />
-      <Route path="/auth" element={<ShopeeAuth />} />
-      <Route path="/returns" element={<Return />} />
-      <Route path="/dashboard" element={<Dashboard/>} />
-      {/* ❗Seu detail está errado — "?" não pode no path */}
-      <Route path="/return/detail" element={<DetailPage />} />
+    <Routes > 
+      <Route element={<LoginVerify />}>
+          <Route element={<ProtectedLayout />}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/scanner" element={<QrReader />} />
+            <Route path="/auth" element={<ShopeeAuth />} />
+            <Route path="/returns" element={<Return />} />
+            <Route path="/dashboard" element={<Dashboard/>} />
+            <Route path="/return/detail" element={<DetailPage />} />
+          </Route>
+      </Route>
+
+      <Route path="/login" element={<LoginPage/>}/>
     </Routes>
   );
 }
