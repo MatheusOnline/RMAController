@@ -29,7 +29,7 @@ function LoginPage() {
 
             if(datas.success){
                 localStorage.setItem("user_token", datas.token)
-                navigate("/home")
+                navigate("/")
             }else{
                 setError("Senha ou usuario está incorreto")
             }
