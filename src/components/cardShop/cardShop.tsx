@@ -74,10 +74,10 @@ export const AddIcon = styled.span`
 
 
 
-export function CardShop({ name, status }: { name: string, status?: string }) {
+export function CardShop({ name, status, img }: { name: string, status?: string, img:string }) {
   return (
     <ContainerCard>
-      <ShopImage src="/shop.png" />
+      <ShopImage src={img} />
 
       <ShopInfo>
         <ShopName>{name}</ShopName>

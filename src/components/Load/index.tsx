@@ -7,13 +7,14 @@ const spin = keyframes`
 
 const LoadScreen = styled.div`
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(255,255,255,0.8);
+  width: 80vw;
+  height: 80vh;
+    
 
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
 `;
 
 const Spinner = styled.div`
