@@ -1,21 +1,21 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom";
-import { ContainerProfile, ImgIconProfile, ShopDatas, NameShop, StatusShop, ConnectedButton } from "./style"
 
-import { VscDebugDisconnect } from "react-icons/vsc";
+import { ContainerProfile, ImgIconProfile, ShopDatas, NameShop, StatusShop } from "./style"
+
+
+
+
 
 function ProfileIcon(){
-    const navigate = useNavigate();
 
-    const [connected, setConnected] = useState(!!localStorage.getItem("shop_id"));
-    const [nameShop, setNameShop] = useState(localStorage.getItem("nameShop") || "");
-    const [logoShop, setLogoShop] = useState(localStorage.getItem("logoShop") || "");
+
+    const [nameShop, setNameShop] = useState(localStorage.getItem("shop_name") || "");
+    
 
     useEffect(() => {
         function updateShop() {
-            setConnected(!!localStorage.getItem("shop_id"));
-            setNameShop(localStorage.getItem("nameShop") || "");
-            setLogoShop(localStorage.getItem("logoShop") || "");
+            setNameShop(localStorage.getItem("shop_name") || "");
+            
         }
 
         window.addEventListener("shopConnected", updateShop);
@@ -25,27 +25,17 @@ function ProfileIcon(){
         };
     }, []);
 
-    function ConnectShop(){
-        navigate("/auth");
-    }
-
+ 
     return(
         <ContainerProfile>
-            {!connected && (
-                <ConnectedButton onClick={ConnectShop}>
-                    <VscDebugDisconnect color="White"/> Conectar Loja
-                </ConnectedButton>
-            )}
-
-            {connected && (
-                <>
-                    <ImgIconProfile alt="Logo da loja" src={logoShop} />
-                    <ShopDatas>
-                        <NameShop>{nameShop}</NameShop>
-                        <StatusShop>Conectado</StatusShop>
-                    </ShopDatas>
-                </>
-            )}
+           
+            <ImgIconProfile />
+            <ShopDatas>
+                <NameShop>{nameShop}</NameShop>
+                <StatusShop>Conectado</StatusShop>
+            </ShopDatas>
+                
+            
         </ContainerProfile>
     )
 }

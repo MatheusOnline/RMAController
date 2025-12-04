@@ -1,20 +1,27 @@
 import styled from "styled-components";
+import { FaUser } from "react-icons/fa6";
+
 
 export const ContainerProfile = styled.div`
     width: 10%;
     height: 90%;
-    padding: 12px;
+    padding: 6px;
     box-sizing: border-box;
     display: flex;
+    align-items: center;
     gap: 5%;
-
+    border: 2px solid #ffffff;
+    border-radius: 50px;
     @media (max-width: 768px) {
         width: 35%;
     }
 `
 
-export const ImgIconProfile = styled.img`
-    
+export const ImgIconProfile = styled(FaUser)`
+    color: #ffffff;
+    font-size: 25px;
+     padding: 6px;
+   
 
 ` 
 export const ShopDatas = styled.div`
