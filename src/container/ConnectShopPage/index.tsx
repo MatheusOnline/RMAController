@@ -18,8 +18,8 @@ const ShopeeAuth: React.FC = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code, shop_id: shopId,user_id })
       });
-
       const data = await res.json();
+      console.log(data)
       localStorage.setItem("token", data.access_token);
 
       GetProfile();
