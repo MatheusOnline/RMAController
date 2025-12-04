@@ -1,6 +1,6 @@
 import { Container, Form, Label, Input, Button, Error, ContainerForm } from "./style";
 import { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/header/header";
 
 
@@ -26,12 +26,12 @@ function LoginPage() {
             })
             
             const datas = await response.json();
+            console.log(datas)
 
             if(datas.success){
                 localStorage.setItem("user_token", datas.token)
                 localStorage.setItem("user_id", datas.user_id)
                 localStorage.setItem("user_name", datas.user_name)
-
                 window.dispatchEvent(new Event("shopConnected"));
                 navigate("/")
             }else{

@@ -8,19 +8,19 @@ function LoginVerify() {
     const token = localStorage.getItem("user_token")
 
     if (!token) {
-        alert("sem token")
-        navigate("/login")
+      alert("sem token")
+      navigate("/login")
       return
-
+      
     }
-
     checkToken(token)
+
   }, [])
 
   async function checkToken(token: string) {
     try {
       const response = await fetch(
-        "http://localhost:5000/login/checktoken",
+        "https://rmabackend-zuvt.onrender.com/login/checktoken",
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -43,7 +43,7 @@ function LoginVerify() {
 
     } catch (error) {
       localStorage.removeItem("user_token" )
-      navigate("/login")
+      navigate("/loginjj")
     }
   }
 

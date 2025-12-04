@@ -9,20 +9,19 @@ import { ContainerProfile, ImgIconProfile, ShopDatas, NameShop, StatusShop } fro
 function ProfileIcon(){
 
 
-    const [nameShop, setNameShop] = useState(localStorage.getItem("shop_name") || "");
+    const [nameShop, setNameShop] = useState(localStorage.getItem("user_name") || "");
     
 
     useEffect(() => {
         function updateShop() {
-            setNameShop(localStorage.getItem("shop_name") || "");
+            setNameShop(localStorage.getItem("user_name") || "");
             
         }
-
+        updateShop(); 
         window.addEventListener("shopConnected", updateShop);
 
-        return () => {
-            window.removeEventListener("shopConnected", updateShop);
-        };
+        window.addEventListener("shopConnected", updateShop);
+        return () => window.removeEventListener("shopConnected", updateShop);
     }, []);
 
  

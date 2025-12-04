@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 import { NavBarContainer,LinkButton, Nav, ItemList, ExitButton, Line } from "./style"
@@ -14,7 +14,11 @@ import { VscDebugDisconnect } from "react-icons/vsc";
 
 function MainNavBar(){
     const location = useLocation();
-
+    const navigate = useNavigate();
+    function exit(){
+        localStorage.removeItem("user_token")
+        navigate("/login")
+    }
     return(
         <NavBarContainer>
             
@@ -43,7 +47,7 @@ function MainNavBar(){
             <br />
             <Line />
             <br />
-            <ExitButton ><IoExitOutline color="red"/>Sair</ExitButton>
+            <ExitButton onClick={exit  } ><IoExitOutline color="red"/>Sair</ExitButton>
         </NavBarContainer>
     )
 }
