@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
-import Home from "./container/Home";
+import Home from "./container/home/home.tsx";
 
 import ShopeeAuth from "./container/ConnectShopPage";
 import Return from "./container/ReturnPage";
