@@ -87,22 +87,15 @@ const ShopeeAuth: React.FC = () => {
   };
 
   
-
+  {/**
   if(shops.length > 0 ){
     return(
       
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {shops.map((shop, i) => (
-            <div key={i} className="p-4 border rounded-lg shadow">
-              <h2 className="text-lg font-bold">{shop.name}</h2>
-              
-            </div>
-          ))}
-        </div>
+        
       
     )
   }
-
+ */}
 
   return (
   <Page>
@@ -132,6 +125,14 @@ const ShopeeAuth: React.FC = () => {
       </CardsContainer>
 
     </MainContainer>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {shops.map((shop, i) => (
+            <div key={i} className="p-4 border rounded-lg shadow">
+              <h2 className="text-lg font-bold">{shop.name}</h2>
+              
+            </div>
+          ))}
+        </div>
   </Page>
 );
 };
