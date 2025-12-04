@@ -70,3 +70,38 @@ export const CardsContainer = styled.div`
     justify-content: center;
 `;
 
+export const ShopGrid = styled.div`
+  height: 100vh;
+  background-color: #f5f7fb;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 10px;
+  `
+
+  export const PageContainer = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  background: #f5f7fb;
+  padding: 40px;
+`
+
+export const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  `
+
+  export const Title = styled.h1`
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--brand-color);
+`
+
+export const Subtitle = styled.p`
+  color: #000000;
+  font-size: 14px;
+  margin-top: 6px;
+`

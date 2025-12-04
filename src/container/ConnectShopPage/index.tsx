@@ -2,7 +2,9 @@ import { useEffect,useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import CardLink from "../../components/Cards/cardLink";
-import { Page, CardsContainer, DetailContainer, HeaderDetail, VerifildIcon, ItemList, MainContainer } from "./style";
+import { CardShop, CardAddShop } from "../../components/cardShop/cardShop";
+
+import { Page, CardsContainer, DetailContainer, HeaderDetail, VerifildIcon, ItemList, MainContainer,ShopGrid, PageContainer,Header, Title,Subtitle  } from "./style";
 
 const ShopeeAuth: React.FC = () => {
   interface Shop {
@@ -28,7 +30,7 @@ const ShopeeAuth: React.FC = () => {
 
   async function listshop(user_id:String) {
       try{
-        const response = await fetch("http://localhost:5000/user/shoplist",{
+        const response = await fetch("https://rmabackend-zuvt.onrender.com/user/shoplist",{
           method: "POST",
           headers: {"Content-Type": "application/json" },
           body: JSON.stringify({user_id})
@@ -87,15 +89,33 @@ const ShopeeAuth: React.FC = () => {
   };
 
   
-  {/**
+  
   if(shops.length > 0 ){
     return(
-      
-        
-      
+      <PageContainer>
+         <Header>
+            <div>
+              <Title>Suas lojas</Title>
+              <Subtitle>Gerencie suas lojas conectadas à sua conta</Subtitle>
+            </div>
+
+            
+        </Header>
+        <ShopGrid>
+           {shops.map((shop, i) => (
+            <CardShop
+              key={i}
+              name={shop.name}
+              status={"online"}
+            />
+          ))}
+
+          <CardAddShop />
+        </ShopGrid>
+      </PageContainer>
     )
   }
- */}
+
 
   return (
   <Page>
@@ -125,14 +145,6 @@ const ShopeeAuth: React.FC = () => {
       </CardsContainer>
 
     </MainContainer>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {shops.map((shop, i) => (
-            <div key={i} className="p-4 border rounded-lg shadow">
-              <h2 className="text-lg font-bold">{shop.name}</h2>
-              
-            </div>
-          ))}
-        </div>
   </Page>
 );
 };

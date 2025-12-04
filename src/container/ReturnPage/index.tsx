@@ -33,10 +33,10 @@ function Return() {
         const cached = sessionStorage.getItem("returns");
 
         if (cached) {
-            console.log("✅ Usando cache de devoluções");
+            
             setReturns(JSON.parse(cached));
         } else {
-            console.log("📡 Buscando devoluções no servidor...");
+            
              CallFunctionReturn();
         }
         
@@ -50,7 +50,6 @@ function Return() {
         if ( storedShopId) {
             GetReturn(storedShopId);
         }else{
-            alert("Token ou Id da loja está faltando aa")
             navigate('/auth')
         }
     }
