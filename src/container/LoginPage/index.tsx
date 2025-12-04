@@ -29,13 +29,15 @@ function LoginPage() {
 
             if(datas.success){
                 localStorage.setItem("user_token", datas.token)
+                localStorage.setItem("user_id", datas.user_id)
                 navigate("/")
             }else{
-                setError("Senha ou usuario está incorreto")
+                setError("Senha ou usuario está incorreto" )     
             }
-
-
+            
+            
         }catch(error){
+            console.log(error)
             setError("Erro no servidor " + error)
             setIsActive(true)
         }finally{

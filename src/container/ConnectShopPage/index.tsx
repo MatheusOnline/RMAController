@@ -11,11 +11,12 @@ const ShopeeAuth: React.FC = () => {
   const shopId = searchParams.get("shop_id");
 
   const getTokenShopLevel = async () => {
+    const user_id = localStorage.getItem("user_id")
     try {
       const res = await fetch(`https://rmabackend-zuvt.onrender.com/token/generate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code, shop_id: shopId })
+        body: JSON.stringify({ code, shop_id: shopId,user_id })
       });
 
       const data = await res.json();

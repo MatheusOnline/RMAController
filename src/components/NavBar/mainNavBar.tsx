@@ -7,7 +7,6 @@ import { NavBarContainer,LinkButton, Nav, ItemList, ExitButton, Line } from "./s
 import { FaHome } from "react-icons/fa";
 import { MdSpaceDashboard } from "react-icons/md";
 import { TbTruckReturn } from "react-icons/tb";
-import { MdOutlineQrCodeScanner } from "react-icons/md";
 import { IoExitOutline } from "react-icons/io5";
 import { VscDebugDisconnect } from "react-icons/vsc";
 
@@ -36,14 +35,9 @@ function MainNavBar(){
                     <LinkButton to="returns">Devoluções</LinkButton>
                 </ItemList>
 
-                <ItemList active={location.pathname === "/scanner"}>
-                    <MdOutlineQrCodeScanner color="white"/>
-                    <LinkButton to="scanner">Scaner</LinkButton>
-                </ItemList>
-
                 <ItemList active={location.pathname === "/auth"}>
                     <VscDebugDisconnect color="white"/>
-                    <LinkButton to="auth">Conectar</LinkButton>
+                    <LinkButton to="auth">Integrações</LinkButton>
                 </ItemList>
             </Nav>
             <br />

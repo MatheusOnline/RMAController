@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./container/Home";
-import QrReader from "./container/ScanerPage";
+
 import ShopeeAuth from "./container/ConnectShopPage";
 import Return from "./container/ReturnPage";
 import DetailPage from "./container/DetailPage";
@@ -17,7 +17,7 @@ function Teste() {
       <Route element={<LoginVerify />}>
           <Route element={<ProtectedLayout />}>
             <Route path="/" element={<Home />} />
-            <Route path="/scanner" element={<QrReader />} />
+           
             <Route path="/auth" element={<ShopeeAuth />} />
             <Route path="/returns" element={<Return />} />
             <Route path="/dashboard" element={<Dashboard/>} />
