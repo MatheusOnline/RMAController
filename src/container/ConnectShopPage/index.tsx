@@ -1,14 +1,49 @@
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import CardLink from "../../components/Cards/cardLink";
 import { Page, CardsContainer, DetailContainer, HeaderDetail, VerifildIcon, ItemList, MainContainer } from "./style";
 
 const ShopeeAuth: React.FC = () => {
-  const [searchParams] = useSearchParams();
+  interface Shop {
+    name: string
+  }
 
+  const [searchParams] = useSearchParams();
+  const [shops, setShops] = useState<Shop[]>([])
   const code = searchParams.get("code");
   const shopId = searchParams.get("shop_id");
+
+   useEffect(() => {
+    const user_id = localStorage.getItem("user_id")
+
+    if(user_id)
+    listshop(user_id)
+
+    
+
+
+    if (code && shopId) getTokenShopLevel();
+  }, [code, shopId]);
+
+  async function listshop(user_id:String) {
+      try{
+        const response = await fetch("http://localhost:5000/user/shoplist",{
+          method: "POST",
+          headers: {"Content-Type": "application/json" },
+          body: JSON.stringify({user_id})
+        })
+
+        const datas = await response.json();
+        setShops(datas.stores)
+        
+
+      }catch(error){
+        alert(error)
+      }
+  }
+
+
 
   const getTokenShopLevel = async () => {
     const user_id = localStorage.getItem("user_id")
@@ -32,10 +67,7 @@ const ShopeeAuth: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    if (code && shopId) getTokenShopLevel();
-  }, [code, shopId]);
-
+ 
   const GetProfile = async () => {
     try {
       const res = await fetch(`https://rmabackend-zuvt.onrender.com/shop/datas`, {
@@ -53,6 +85,24 @@ const ShopeeAuth: React.FC = () => {
       alert("Erro ao buscar perfil");
     }
   };
+
+  
+
+  if(shops.length > 0 ){
+    return(
+      
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {shops.map((shop, i) => (
+            <div key={i} className="p-4 border rounded-lg shadow">
+              <h2 className="text-lg font-bold">{shop.name}</h2>
+              
+            </div>
+          ))}
+        </div>
+      
+    )
+  }
+
 
   return (
   <Page>
