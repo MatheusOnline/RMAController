@@ -120,6 +120,7 @@ function DetailPage(){
 
     async function CallTracking() {
         try{
+            
             const shopIdParam = localStorage.getItem("shop_id") || "";
             const res = await fetch(`https://rmabackend-zuvt.onrender.com/return/tracking`,{
                 method: "POST",
@@ -127,8 +128,10 @@ function DetailPage(){
                 body: JSON.stringify({return_sn, shop_id: shopIdParam})
             })
 
-            const response = await res.json();
             
+            const response = await res.json();
+            console.log(response)
+           
             if(response.success)
             {
                 console.log(response.datas)
